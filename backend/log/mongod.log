@@ -1,0 +1,222 @@
+Sun Mar 23 02:28:54.734 [initandlisten] MongoDB starting : pid=1379 port=27017 dbpath=/Users/d-chan/Sites/qubitfarm/data/ 64-bit host=emidash-2.local
+Sun Mar 23 02:28:54.734 [initandlisten] 
+Sun Mar 23 02:28:54.734 [initandlisten] ** WARNING: soft rlimits too low. Number of files is 256, should be at least 1000
+Sun Mar 23 02:28:54.734 [initandlisten] db version v2.4.6
+Sun Mar 23 02:28:54.734 [initandlisten] git version: b9925db5eac369d77a3a5f5d98a145eaaacd9673
+Sun Mar 23 02:28:54.734 [initandlisten] build info: Darwin bs-osx-106-x86-64-2.10gen.cc 10.8.0 Darwin Kernel Version 10.8.0: Tue Jun  7 16:32:41 PDT 2011; root:xnu-1504.15.3~1/RELEASE_X86_64 x86_64 BOOST_LIB_VERSION=1_49
+Sun Mar 23 02:28:54.734 [initandlisten] allocator: system
+Sun Mar 23 02:28:54.734 [initandlisten] options: { dbpath: "/Users/d-chan/Sites/qubitfarm/data/", fork: true, logpath: "/Users/d-chan/Sites/qubitfarm/log/mongod.log" }
+Sun Mar 23 02:28:54.735 [initandlisten] journal dir=/Users/d-chan/Sites/qubitfarm/data/journal
+Sun Mar 23 02:28:54.736 [initandlisten] recover : no journal files present, no recovery needed
+Sun Mar 23 02:28:54.917 [websvr] admin web console waiting for connections on port 28017
+Sun Mar 23 02:28:54.917 [initandlisten] waiting for connections on port 27017
+Sun Mar 23 02:29:04.951 [initandlisten] connection accepted from 127.0.0.1:51531 #1 (1 connection now open)
+Sun Mar 23 02:30:00.028 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/test.ns, filling with zeroes...
+Sun Mar 23 02:30:00.029 [FileAllocator] creating directory /Users/d-chan/Sites/qubitfarm/data/_tmp
+Sun Mar 23 02:30:00.070 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/test.ns, size: 16MB,  took 0.041 secs
+Sun Mar 23 02:30:00.266 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/test.0, filling with zeroes...
+Sun Mar 23 02:30:00.815 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/test.0, size: 64MB,  took 0.548 secs
+Sun Mar 23 02:30:00.960 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/test.1, filling with zeroes...
+Sun Mar 23 02:30:01.149 [conn1] build index test.users { _id: 1 }
+Sun Mar 23 02:30:01.198 [conn1] build index done.  scanned 0 total records. 0.048 secs
+Sun Mar 23 02:30:01.198 [conn1] command test.$cmd command: { create: "users" } ntoreturn:1 keyUpdates:0 locks(micros) w:1170700 reslen:37 1170ms
+Sun Mar 23 02:30:02.554 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/test.1, size: 128MB,  took 1.592 secs
+Sun Mar 23 02:30:16.830 [conn1] build index test.world1 { _id: 1 }
+Sun Mar 23 02:30:16.853 [conn1] build index done.  scanned 0 total records. 0.022 secs
+Sun Mar 23 03:00:56.478 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/qubitfarm.ns, filling with zeroes...
+Sun Mar 23 03:00:56.628 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/qubitfarm.ns, size: 16MB,  took 0.068 secs
+Sun Mar 23 03:00:56.765 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/qubitfarm.0, filling with zeroes...
+Sun Mar 23 03:00:57.331 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/qubitfarm.0, size: 64MB,  took 0.566 secs
+Sun Mar 23 03:00:57.611 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/qubitfarm.1, filling with zeroes...
+Sun Mar 23 03:00:57.613 [conn1] build index qubitfarm.users { _id: 1 }
+Sun Mar 23 03:00:57.634 [conn1] build index done.  scanned 0 total records. 0.02 secs
+Sun Mar 23 03:00:57.634 [conn1] command qubitfarm.$cmd command: { create: "users" } ntoreturn:1 keyUpdates:0 locks(micros) w:1156534 reslen:37 1156ms
+Sun Mar 23 03:00:59.043 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/qubitfarm.1, size: 128MB,  took 1.43 secs
+Sun Mar 23 03:01:01.718 [conn1] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 03:01:01.732 [conn1] build index done.  scanned 0 total records. 0.014 secs
+Sun Mar 23 04:55:09.366 [initandlisten] connection accepted from 127.0.0.1:52384 #2 (2 connections now open)
+Sun Mar 23 04:55:32.681 [initandlisten] connection accepted from 127.0.0.1:52388 #3 (3 connections now open)
+Sun Mar 23 05:02:28.527 [conn2] end connection 127.0.0.1:52384 (2 connections now open)
+Sun Mar 23 05:03:06.675 [initandlisten] connection accepted from 127.0.0.1:52466 #4 (3 connections now open)
+Sun Mar 23 05:08:57.821 [conn4] end connection 127.0.0.1:52466 (2 connections now open)
+Sun Mar 23 05:08:58.746 [conn3] end connection 127.0.0.1:52388 (1 connection now open)
+Sun Mar 23 05:10:10.739 [initandlisten] connection accepted from 127.0.0.1:52520 #5 (2 connections now open)
+Sun Mar 23 05:10:22.908 [initandlisten] connection accepted from 127.0.0.1:52523 #6 (3 connections now open)
+Sun Mar 23 05:10:24.366 [initandlisten] connection accepted from 127.0.0.1:52526 #7 (4 connections now open)
+Sun Mar 23 05:19:16.514 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/world1.ns, filling with zeroes...
+Sun Mar 23 05:19:16.559 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/world1.ns, size: 16MB,  took 0.044 secs
+Sun Mar 23 05:19:16.562 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/world1.0, filling with zeroes...
+Sun Mar 23 05:19:17.128 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/world1.0, size: 64MB,  took 0.565 secs
+Sun Mar 23 05:19:17.413 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/world1.1, filling with zeroes...
+Sun Mar 23 05:19:17.415 [conn1] build index world1.world1 { _id: 1 }
+Sun Mar 23 05:19:17.563 [conn1] build index done.  scanned 0 total records. 0.147 secs
+Sun Mar 23 05:19:17.565 [conn1] insert world1.world1 ninserted:1 keyUpdates:0 locks(micros) w:1050419 1050ms
+Sun Mar 23 05:19:18.816 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/world1.1, size: 128MB,  took 1.403 secs
+Sun Mar 23 05:22:49.102 [conn6] insert qubitfarm.world1 keyUpdates:0 exception: E11000 duplicate key error index: qubitfarm.world1.$_id_  dup key: { : "0hg08rhg" } code:11000 locks(micros) w:203459 203ms
+Sun Mar 23 05:37:04.630 [initandlisten] connection accepted from 127.0.0.1:52689 #8 (5 connections now open)
+Sun Mar 23 05:40:18.603 [conn8] end connection 127.0.0.1:52689 (4 connections now open)
+Sun Mar 23 05:40:19.554 [conn7] end connection 127.0.0.1:52526 (3 connections now open)
+Sun Mar 23 05:43:03.166 [conn6] end connection 127.0.0.1:52523 (2 connections now open)
+Sun Mar 23 05:43:05.045 [conn5] end connection 127.0.0.1:52520 (1 connection now open)
+Sun Mar 23 05:47:59.935 [initandlisten] connection accepted from 127.0.0.1:52755 #9 (2 connections now open)
+Sun Mar 23 05:48:01.634 [initandlisten] connection accepted from 127.0.0.1:52758 #10 (3 connections now open)
+Sun Mar 23 06:00:16.802 [conn1] remove qubitfarm.colleciton query: { $where: "world1" } ndeleted:0 keyUpdates:0 locks(micros) w:106689 106ms
+Sun Mar 23 06:02:28.895 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:02:29.117 [conn1] command qubitfarm.$cmd command: { drop: "world1" } ntoreturn:1 keyUpdates:0 locks(micros) w:221685 reslen:123 221ms
+Sun Mar 23 06:02:41.041 [conn9] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:02:41.120 [conn9] build index done.  scanned 0 total records. 0.077 secs
+Sun Mar 23 06:02:49.460 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:04:09.787 [conn9] end connection 127.0.0.1:52755 (2 connections now open)
+Sun Mar 23 06:04:11.035 [conn10] end connection 127.0.0.1:52758 (1 connection now open)
+Sun Mar 23 06:04:43.678 [initandlisten] connection accepted from 127.0.0.1:52926 #11 (2 connections now open)
+Sun Mar 23 06:04:43.684 [conn11] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:04:43.685 [conn11] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 06:05:00.370 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:05:04.034 [conn11] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:05:04.035 [conn11] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 06:05:08.862 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:06:13.157 [initandlisten] connection accepted from 127.0.0.1:52936 #12 (3 connections now open)
+Sun Mar 23 06:06:26.806 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/worldqubitfarm.ns, filling with zeroes...
+Sun Mar 23 06:06:26.875 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/worldqubitfarm.ns, size: 16MB,  took 0.068 secs
+Sun Mar 23 06:06:27.020 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/worldqubitfarm.0, filling with zeroes...
+Sun Mar 23 06:06:27.962 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/worldqubitfarm.0, size: 64MB,  took 0.749 secs
+Sun Mar 23 06:06:28.244 [FileAllocator] allocating new datafile /Users/d-chan/Sites/qubitfarm/data/worldqubitfarm.1, filling with zeroes...
+Sun Mar 23 06:06:28.246 [conn11] build index worldqubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:06:28.305 [conn11] build index done.  scanned 0 total records. 0.058 secs
+Sun Mar 23 06:06:28.305 [conn11] insert worldqubitfarm.world1 ninserted:1 keyUpdates:0 locks(micros) w:1499633 1499ms
+Sun Mar 23 06:06:29.729 [FileAllocator] done allocating datafile /Users/d-chan/Sites/qubitfarm/data/worldqubitfarm.1, size: 128MB,  took 1.485 secs
+Sun Mar 23 06:06:59.582 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:07:14.580 [conn12] end connection 127.0.0.1:52936 (2 connections now open)
+Sun Mar 23 06:07:15.401 [conn11] end connection 127.0.0.1:52926 (1 connection now open)
+Sun Mar 23 06:07:32.822 [initandlisten] connection accepted from 127.0.0.1:52948 #13 (2 connections now open)
+Sun Mar 23 06:07:32.826 [conn13] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:07:32.827 [conn13] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 06:07:43.656 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:07:47.650 [initandlisten] connection accepted from 127.0.0.1:52951 #14 (3 connections now open)
+Sun Mar 23 06:07:47.658 [conn14] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:07:47.660 [conn14] build index done.  scanned 0 total records. 0.001 secs
+Sun Mar 23 06:07:51.675 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:07:55.142 [conn13] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:07:55.143 [conn13] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 06:08:56.732 [conn1] CMD: drop world1.world1
+Sun Mar 23 06:10:20.498 [conn1] CMD: drop users.test
+Sun Mar 23 06:12:55.532 [conn1] dropDatabase test starting
+Sun Mar 23 06:12:55.543 [conn1] removeJournalFiles
+Sun Mar 23 06:12:55.629 [conn1] dropDatabase test finished
+Sun Mar 23 06:13:15.796 [conn1] dropDatabase users starting
+Sun Mar 23 06:13:15.803 [conn1] removeJournalFiles
+Sun Mar 23 06:13:15.803 [conn1] dropDatabase users finished
+Sun Mar 23 06:13:29.979 [conn1] dropDatabase world1 starting
+Sun Mar 23 06:13:29.986 [conn1] removeJournalFiles
+Sun Mar 23 06:13:30.081 [conn1] dropDatabase world1 finished
+Sun Mar 23 06:13:30.081 [conn1] command world1.$cmd command: { dropDatabase: 1.0 } ntoreturn:1 keyUpdates:0 locks(micros) W:102323 reslen:57 102ms
+Sun Mar 23 06:13:42.628 [conn1] dropDatabase worldqubitfarm starting
+Sun Mar 23 06:13:42.634 [conn1] removeJournalFiles
+Sun Mar 23 06:13:42.646 [conn1] dropDatabase worldqubitfarm finished
+Sun Mar 23 06:14:31.796 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:14:39.024 [conn14] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:14:39.025 [conn14] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 06:14:54.041 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:14:56.355 [conn13] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:14:56.356 [conn13] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 06:17:27.476 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 06:17:31.120 [conn13] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 06:17:31.121 [conn13] build index done.  scanned 0 total records. 0.001 secs
+Sun Mar 23 13:55:42.541 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 13:55:42.718 [conn1] command qubitfarm.$cmd command: { drop: "world1" } ntoreturn:1 keyUpdates:0 locks(micros) w:176973 reslen:123 176ms
+Sun Mar 23 13:55:48.238 [initandlisten] connection accepted from 127.0.0.1:56586 #15 (4 connections now open)
+Sun Mar 23 13:56:10.439 [initandlisten] connection accepted from 127.0.0.1:56590 #16 (5 connections now open)
+Sun Mar 23 13:58:42.077 [initandlisten] connection accepted from 127.0.0.1:56611 #17 (6 connections now open)
+Sun Mar 23 13:59:26.998 [conn13] build index qubitfarm.world2 { _id: 1 }
+Sun Mar 23 13:59:27.023 [conn13] build index done.  scanned 0 total records. 0.024 secs
+Sun Mar 23 14:00:03.516 [initandlisten] connection accepted from 127.0.0.1:56622 #18 (7 connections now open)
+Sun Mar 23 14:00:09.909 [initandlisten] connection accepted from 127.0.0.1:56626 #19 (8 connections now open)
+Sun Mar 23 14:04:34.638 [conn1] CMD: drop qubitfarm.world2
+Sun Mar 23 14:04:40.157 [conn17] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 14:04:40.159 [conn17] build index done.  scanned 0 total records. 0.001 secs
+Sun Mar 23 14:06:35.473 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 14:06:40.626 [conn13] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 14:06:40.627 [conn13] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 14:06:55.442 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 14:09:07.358 [conn14] build index qubitfarm.world1 { _id: 1 }
+Sun Mar 23 14:09:07.360 [conn14] build index done.  scanned 0 total records. 0.002 secs
+Sun Mar 23 14:10:13.180 [conn18] build index qubitfarm.world4 { _id: 1 }
+Sun Mar 23 14:10:13.204 [conn18] build index done.  scanned 0 total records. 0.023 secs
+Sun Mar 23 14:10:13.204 [conn18] insert qubitfarm.world4 ninserted:1 keyUpdates:0 locks(micros) w:187789 187ms
+Sun Mar 23 14:23:13.877 [conn18] build index qubitfarm.world89 { _id: 1 }
+Sun Mar 23 14:23:13.899 [conn18] build index done.  scanned 0 total records. 0.02 secs
+Sun Mar 23 14:23:36.546 [conn19] build index qubitfarm.world29 { _id: 1 }
+Sun Mar 23 14:23:36.635 [conn19] build index done.  scanned 0 total records. 0.088 secs
+Sun Mar 23 14:23:53.773 [conn1] CMD: drop qubitfarm.world1
+Sun Mar 23 14:23:58.166 [conn1] CMD: drop qubitfarm.world29
+Sun Mar 23 14:23:58.277 [conn1] command qubitfarm.$cmd command: { drop: "world29" } ntoreturn:1 keyUpdates:0 locks(micros) w:110795 reslen:124 110ms
+Sun Mar 23 14:24:02.816 [conn1] CMD: drop qubitfarm.world4
+Sun Mar 23 14:24:07.688 [conn1] CMD: drop qubitfarm.world89
+Sun Mar 23 14:38:23.845 [conn19] end connection 127.0.0.1:56626 (7 connections now open)
+Sun Mar 23 14:38:25.967 [conn15] end connection 127.0.0.1:56586 (6 connections now open)
+Sun Mar 23 14:38:39.526 [conn16] end connection 127.0.0.1:56590 (5 connections now open)
+Sun Mar 23 14:38:44.333 [conn13] end connection 127.0.0.1:52948 (4 connections now open)
+Sun Mar 23 14:38:45.194 [conn17] end connection 127.0.0.1:56611 (3 connections now open)
+Sun Mar 23 14:39:02.263 [conn14] end connection 127.0.0.1:52951 (2 connections now open)
+Sun Mar 23 14:39:03.497 [conn18] end connection 127.0.0.1:56622 (1 connection now open)
+Sun Mar 23 14:41:51.205 [initandlisten] connection accepted from 127.0.0.1:57302 #20 (2 connections now open)
+Sun Mar 23 14:44:45.487 [initandlisten] connection accepted from 127.0.0.1:57309 #21 (3 connections now open)
+Sun Mar 23 14:45:06.043 [initandlisten] connection accepted from 127.0.0.1:57313 #22 (4 connections now open)
+Sun Mar 23 14:45:06.909 [conn22] build index qubitfarm.world109 { _id: 1 }
+Sun Mar 23 14:45:06.910 [conn22] build index done.  scanned 0 total records. 0.001 secs
+Sun Mar 23 14:58:45.142 [conn1] CMD: drop qubitfarm.world109
+Sun Mar 23 14:59:04.988 [conn21] build index qubitfarm.world109 { _id: 1 }
+Sun Mar 23 14:59:04.989 [conn21] build index done.  scanned 0 total records. 0 secs
+Sun Mar 23 15:08:04.902 [conn21] end connection 127.0.0.1:57309 (3 connections now open)
+Sun Mar 23 15:08:06.363 [conn20] end connection 127.0.0.1:57302 (2 connections now open)
+Sun Mar 23 15:08:07.097 [conn22] end connection 127.0.0.1:57313 (1 connection now open)
+Sun Mar 23 15:08:14.989 [initandlisten] connection accepted from 127.0.0.1:57447 #23 (2 connections now open)
+Sun Mar 23 15:08:36.858 [initandlisten] connection accepted from 127.0.0.1:57450 #24 (3 connections now open)
+Sun Mar 23 15:10:26.123 [conn24] build index qubitfarm.world110 { _id: 1 }
+Sun Mar 23 15:10:26.216 [conn24] build index done.  scanned 0 total records. 0.091 secs
+Sun Mar 23 15:10:56.691 [conn23] build index qubitfarm.world111 { _id: 1 }
+Sun Mar 23 15:10:56.769 [conn23] build index done.  scanned 0 total records. 0.001 secs
+Sun Mar 23 15:11:14.599 [conn24] build index qubitfarm.world112 { _id: 1 }
+Sun Mar 23 15:11:14.676 [conn24] build index done.  scanned 0 total records. 0.075 secs
+Sun Mar 23 15:13:30.157 [initandlisten] connection accepted from 66.87.116.32:2908 #25 (4 connections now open)
+Sun Mar 23 15:13:30.450 [initandlisten] connection accepted from 66.87.116.32:12007 #26 (5 connections now open)
+Sun Mar 23 15:13:32.804 [initandlisten] connection accepted from 66.87.116.32:4140 #27 (6 connections now open)
+Sun Mar 23 15:13:35.057 [initandlisten] connection accepted from 66.87.116.32:8151 #28 (7 connections now open)
+Sun Mar 23 15:13:35.227 [initandlisten] connection accepted from 66.87.116.32:8770 #29 (8 connections now open)
+Sun Mar 23 15:13:40.501 [conn24] build index qubitfarm.world113 { _id: 1 }
+Sun Mar 23 15:13:40.528 [conn24] build index done.  scanned 0 total records. 0.026 secs
+Sun Mar 23 15:13:51.672 [conn26] end connection 66.87.116.32:12007 (7 connections now open)
+Sun Mar 23 15:13:51.672 [conn28] end connection 66.87.116.32:8151 (6 connections now open)
+Sun Mar 23 15:13:51.672 [conn29] end connection 66.87.116.32:8770 (6 connections now open)
+Sun Mar 23 15:13:51.673 [conn27] end connection 66.87.116.32:4140 (5 connections now open)
+Sun Mar 23 15:13:51.672 [conn25] end connection 66.87.116.32:2908 (6 connections now open)
+Sun Mar 23 15:13:52.040 [initandlisten] connection accepted from 66.87.116.32:4223 #30 (4 connections now open)
+Sun Mar 23 15:13:52.363 [initandlisten] connection accepted from 66.87.116.32:7479 #31 (5 connections now open)
+Sun Mar 23 15:13:53.789 [initandlisten] connection accepted from 66.87.116.32:2562 #32 (6 connections now open)
+Sun Mar 23 15:13:58.616 [initandlisten] connection accepted from 66.87.116.32:12476 #33 (7 connections now open)
+Sun Mar 23 15:16:35.113 [conn32] end connection 66.87.116.32:2562 (6 connections now open)
+Sun Mar 23 15:16:35.124 [conn33] end connection 66.87.116.32:12476 (5 connections now open)
+Sun Mar 23 15:16:35.124 [conn30] end connection 66.87.116.32:4223 (5 connections now open)
+Sun Mar 23 15:16:35.147 [conn31] end connection 66.87.116.32:7479 (3 connections now open)
+Sun Mar 23 15:28:06.024 [conn1] end connection 127.0.0.1:51531 (2 connections now open)
+Sun Mar 23 15:28:09.419 [initandlisten] connection accepted from 127.0.0.1:57750 #34 (3 connections now open)
+Sun Mar 23 15:29:47.871 [conn34] terminating, shutdown command received
+Sun Mar 23 15:29:47.872 dbexit: shutdown called
+Sun Mar 23 15:29:47.872 [conn34] shutdown: going to close listening sockets...
+Sun Mar 23 15:29:47.872 [conn34] closing listening socket: 9
+Sun Mar 23 15:29:47.872 [conn34] closing listening socket: 10
+Sun Mar 23 15:29:47.872 [conn34] closing listening socket: 11
+Sun Mar 23 15:29:47.872 [conn34] removing socket file: /tmp/mongodb-27017.sock
+Sun Mar 23 15:29:47.873 [conn34] shutdown: going to flush diaglog...
+Sun Mar 23 15:29:47.873 [conn34] shutdown: going to close sockets...
+Sun Mar 23 15:29:47.873 [conn34] shutdown: waiting for fs preallocator...
+Sun Mar 23 15:29:47.873 [conn34] shutdown: lock for final commit...
+Sun Mar 23 15:29:47.873 [conn34] shutdown: final commit...
+Sun Mar 23 15:29:47.873 [conn23] end connection 127.0.0.1:57447 (2 connections now open)
+Sun Mar 23 15:29:47.873 [conn24] end connection 127.0.0.1:57450 (2 connections now open)
+Sun Mar 23 15:29:47.878 [conn34] shutdown: closing all files...
+Sun Mar 23 15:29:47.993 [conn34] closeAllFiles() finished
+Sun Mar 23 15:29:47.993 [conn34] journalCleanup...
+Sun Mar 23 15:29:47.993 [conn34] removeJournalFiles
+Sun Mar 23 15:29:48.020 [conn34] shutdown: removing fs lock...
+Sun Mar 23 15:29:48.020 dbexit: really exiting now
