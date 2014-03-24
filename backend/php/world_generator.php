@@ -1,5 +1,8 @@
 <?php
-//header('Content-type: application/json');
+
+// ---------------------------------------------------------------------------------------------------- //
+
+header('Content-type: application/json');
 date_default_timezone_set('America/New_York');
 $json_request = file_get_contents('php://input');
 $seed = json_decode($json_request,true);
@@ -9,7 +12,8 @@ $seed = json_decode($json_request,true);
 function worldGenerator($seed) {
 	$world_database = $seed['database'];
 	$world_collection = $seed['world_prefix'].$seed['world_index'];
-	$connection = new MongoClient();
+	$server = 'mongodb://'.$seed['username'].':'.$seed['password'].'@'.$seed['uri'].'/'.$world_database;
+	$connection = new MongoClient($server);
 	$collection = $connection->$world_database->$world_collection;
 	
 	$collection_exists = 0;

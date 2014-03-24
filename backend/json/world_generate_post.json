@@ -1,0 +1,12 @@
+{
+    "database": "qubitfarm",
+    "username": "qubitfarmer",
+    "password": "killmedaddy",
+    "uri": "ds031347.mongolab.com:31347",
+    "world_index": 1,
+    "world_prefix": "qfw",
+    "num_of_patches": 9,
+    "gen_method": {
+        "num_of_seeds": 100
+    }
+}
