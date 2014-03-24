@@ -8,7 +8,7 @@ $seed = json_decode($json_request,true);
 
 function worldGenerator($seed) {
 	$world_database = $seed['database'];
-	$world_collection = 'world'.$seed['world_num'];
+	$world_collection = $seed['world_prefix'].$seed['world_index'];
 	$connection = new MongoClient();
 	$collection = $connection->$world_database->$world_collection;
 	
@@ -21,22 +21,25 @@ function worldGenerator($seed) {
 		$seed_array = seedGen($seed);
 		for ($i=0;$i<sizeof($seed_array);$i++) {
 	    	$world = array(
-	    		"_id" => $seed['world_code'].'-'.md5($seed['patch_gen_salt'].$i),
+	    		"_id" => $world_collection.md5($world_collection.$i),
 				"date_generated" => date('r'),
 				"info" => array(
-					"patch_name" => $seed_array[$i],
-					"patch_style" => array (
+					"plot_name" => $seed_array[$i],
+					"plot_style" => array (
 						"background_color_rbg" => array(133,233,333),
 						"color_rbg" => array(244,12,32)
 					),
 				),
 				"parameters" => array (
 					"bonus_probability" => array(1,1000),
-			        "num_of_patchs" => 9, 
-			        "num_of_qubits" => 6478, 
-			        "num_of_qubits_total" => 10000, 
-			        "patch_growth_rate" => array(20,100), 
-			        "patch_value" => 5000
+			        "patch_total" => 9, 
+			        "qubits_availible" => 6478, 
+			        "qubits_total" => 10000, 
+			        "plot_value" => 5000,
+					"plot_layout" => array(
+						"patch_dimensions" => array(3,3),
+						"patch_attributes" => array(0,20,100,20,0,20,60,120,120)
+					)
 				)
 			
 	    	);
