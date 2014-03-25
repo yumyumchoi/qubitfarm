@@ -3,10 +3,31 @@
     "username": "qubitfarmer",
     "password": "killmedaddy",
     "uri": "ds031347.mongolab.com:31347",
-    "world_index": 1,
+    "world_index": 434,
     "world_prefix": "qfw",
-    "num_of_patches": 9,
-    "gen_method": {
-        "num_of_seeds": 100
+    "num_of_plots": 5,
+    "plot_range_dims": {
+        "min": 1,
+        "max": 24
+    },
+    "qubit_range_plot": {
+        "factor": 1,
+        "base": 250,
+        "range": [
+            1,
+            10
+        ]
+    },
+    "qubit_range_patch": {
+        "min": 0,
+        "max": 15
+    },
+    "quit_growth_rate": {
+        "min": 1,
+        "max": 100
+    },
+    "bonus_probability": {
+        "min": 1,
+        "max": 1000
     }
 }

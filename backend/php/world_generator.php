@@ -2,7 +2,7 @@
 
 // ---------------------------------------------------------------------------------------------------- //
 
-header('Content-type: application/json');
+//header('Content-type: application/json');
 date_default_timezone_set('America/New_York');
 $json_request = file_get_contents('php://input');
 $seed = json_decode($json_request,true);
@@ -21,10 +21,17 @@ function worldGenerator($seed) {
 	foreach($cursor as $doc) { if(isset($doc)) { $collection_exists = 1; }}
 	
 	if ($collection_exists == 1) { echo $world_collection.' already exists!'; die; } else {
-	
 		$seed_array = seedGen($seed);
 		for ($i=0;$i<sizeof($seed_array);$i++) {
-	    	$world = array(
+			
+			$total_qubits = ($seed['qubit_range_plot']['factor']*$seed['qubit_range_plot']['base'])*(rand($seed['qubit_range_plot']['range'][0],$seed['qubit_range_plot']['range'][1]));
+			$num_of_patches = rand($seed['plot_range_dims']['min'],$seed['plot_range_dims']['max']);
+			
+			for($j=0;$j<$num_of_patches;$j++) { 
+				$patch_layout[] = rand($seed['qubit_range_patch']['min'],$seed['qubit_range_patch']['max']);
+			}
+
+			$world = array(
 	    		"_id" => $world_collection.md5($world_collection.$i),
 				"date_generated" => date('r'),
 				"info" => array(
@@ -35,37 +42,34 @@ function worldGenerator($seed) {
 					),
 				),
 				"parameters" => array (
-					"bonus_probability" => array(1,1000),
-			        "patch_total" => 9, 
-			        "qubits_availible" => 6478, 
-			        "qubits_total" => 10000, 
-			        "plot_value" => 5000,
-					"plot_layout" => array(
-						"patch_dimensions" => array(3,3),
-						"patch_attributes" => array(0,20,100,20,0,20,60,120,120)
-					)
+					"bonus_probability" => array($seed['bonus_probability']['min'],rand($seed['bonus_probability']['max'], $seed['bonus_probability'][1])),
+			        "qubits_availible" => $total_qubits, 
+			        "qubits_total" => $total_qubits, 
+					"plot_size" => $num_of_patches,
+					"plot_layout" => $patch_layout
 				)
-			
 	    	);
-		
+			//var_dump($world);
 			$collection->insert($world);
 		}
+		
 		echo $world_collection. ' was created!';
 	}
+	
 }
 
 // ---------------------------------------------------------------------------------------------------- //`
 
 function seedGen($seed) {
-	if (isset($seed['gen_method'])) {
-		if (isset($seed['gen_method']['top_ten_crit_url'])) {
-			$clean_url = stripslashes($seed['gen_method']['top_ten_crit_url']);
+	if (isset($seed)) {
+		if (isset($seed['top_ten_crit_url'])) {
+			$clean_url = stripslashes($seed['top_ten_crit_url']);
 			$top_ten_crit_string = shell_exec('../sh/./get_crit_colletion_title.sh '.$clean_url);
 			$top_ten_crit_array = explode("\n",$top_ten_crit_string);
 			return array_filter($top_ten_crit_array);
 		}
-		if (isset($seed['gen_method']['num_of_seeds'])) {
-			for($i=0;$i<$seed['gen_method']['num_of_seeds'];$i++) { $seed_num_array[] = $i ; }
+		if (isset($seed['num_of_plots'])) {
+			for($i=0;$i<$seed['num_of_plots'];$i++) { $seed_num_array[] = $i ; }
 			return $seed_num_array;	
 		}
 	} else {
