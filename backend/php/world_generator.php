@@ -20,19 +20,30 @@ function worldGenerator($seed) {
 	$cursor = $collection->findOne(array());
 	foreach($cursor as $doc) { if(isset($doc)) { $collection_exists = 1; }}
 	
-	if ($collection_exists == 1) { echo $world_collection.' already exists!'; die; } else {
+	if ($collection_exists == 1 && $seed['publish'] == true) { echo $world_collection.' already exists!'; die; } else {
 		$seed_array = seedGen($seed);
 		for ($i=0;$i<sizeof($seed_array);$i++) {
 			
 			$total_qubits = ($seed['qubit_range_plot']['factor']*$seed['qubit_range_plot']['base'])*(rand($seed['qubit_range_plot']['range'][0],$seed['qubit_range_plot']['range'][1]));
-			$num_of_patches = rand($seed['plot_range_dims']['min'],$seed['plot_range_dims']['max']);
+			$num_of_patches = rand($seed['plot_scale']['min'],$seed['plot_scale']['max']);
 			
 			for($j=0;$j<$num_of_patches;$j++) { 
-				$patch_layout[] = rand($seed['qubit_range_patch']['min'],$seed['qubit_range_patch']['max']);
+				
+				$patch_is = rand($seed['qubit_range_patch']['min'],$seed['qubit_range_patch']['max']);
+				$qubit_growth_rate = rand($seed['quit_growth_rate']['min'],$seed['quit_growth_rate']['max']);
+				
+				if ($patch_is == 0) { 
+					$patch_layout[] = array('patch_is' => false);
+				} elseif ($patch_is == 1) { 
+					$patch_layout[] = array('patch_is' => true, 'qubit_growth_rate' => $qubit_growth_rate);
+				}
+				
 			}
 
 			$world = array(
 	    		"_id" => $world_collection.md5($world_collection.$i),
+	    		"index" => $i,
+	    		"size_of_world" => $seed['num_of_plots'],
 				"date_generated" => date('r'),
 				"info" => array(
 					"plot_name" => $seed_array[$i],
@@ -44,18 +55,20 @@ function worldGenerator($seed) {
 				"parameters" => array (
 					"bonus_probability" => array($seed['bonus_probability']['min'],rand($seed['bonus_probability']['max'], $seed['bonus_probability'][1])),
 			        "qubits_availible" => $total_qubits, 
-			        "qubits_total" => $total_qubits, 
+			        "qubits_total" => $total_qubits,
+			        "plot_dimensions" => array('width' => $seed['plot_dimensions']['width'],'height' => $seed['plot_dimensions']['height']),
 					"plot_size" => $num_of_patches,
 					"plot_layout" => $patch_layout
 				)
 	    	);
-			//var_dump($world);
-			$collection->insert($world);
+	    	
+			if ($seed['publish'] == true) { $collection->insert($world); } elseif ($seed['publish'] == false) { echo json_encode($world); }
+			$patch_layout = array();
 		}
 		
-		echo $world_collection. ' was created!';
+		if ($seed['publish'] == true) { echo $world_collection. ' was created!'; } elseif ($seed['publish'] == false) { }
+		
 	}
-	
 }
 
 // ---------------------------------------------------------------------------------------------------- //`
