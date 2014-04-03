@@ -1,12 +1,12 @@
 {
-	"publish" : false,
+	"publish" : true,
     "database": "qubitfarm",
     "username": "qubitfarmer",
     "password": "killmedaddy",
     "uri": "ds031347.mongolab.com:31347",
-    "world_index": 23,
+    "world_index": 1,
     "world_prefix": "qfw",
-    "num_of_plots": 1,
+    "num_of_plots": 100,
     "plot_dimensions" : {
     	"width": 4,
         "height": 4

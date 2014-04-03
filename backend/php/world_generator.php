@@ -2,7 +2,6 @@
 
 // ---------------------------------------------------------------------------------------------------- //
 
-//header('Content-type: application/json');
 date_default_timezone_set('America/New_York');
 $json_request = file_get_contents('php://input');
 $seed = json_decode($json_request,true);
@@ -67,13 +66,7 @@ function worldGenerator($seed) {
 					"plot_layout" => $patch_layout
 				)
 	    	);
-	    	
-			if ($seed['publish'] == true) { 
-				
-			} 
-			elseif ($seed['publish'] == false) { 
-				
-			}
+
 			$total_qubits_in_plot = array();
 			$patch_layout = array();
 		}
@@ -88,37 +81,17 @@ function worldGenerator($seed) {
 				array('$set' => array('qubits_total_in_world' => $total_qubits_in_world_sum )),
 				array("multiple" => true)
 			);
-			
-			//db.qfw17.update({},{$set:{"qubits_total_in_world":123456}},{multi:true})
-			
+
 			echo $world_collection. ' was created!'; 
 		} 
 		elseif ($seed['publish'] == false) { 
-			echo json_encode($world); // SINGLE
+			//echo json_encode($world); // SINGLE
 		}
 		
 	}
 }
 
 // ---------------------------------------------------------------------------------------------------- //`
-
-function seedGen($seed) {
-	if (isset($seed)) {
-		if (isset($seed['top_ten_crit_url'])) {
-			$clean_url = stripslashes($seed['top_ten_crit_url']);
-			$top_ten_crit_string = shell_exec('../sh/./get_crit_colletion_title.sh '.$clean_url);
-			$top_ten_crit_array = explode("\n",$top_ten_crit_string);
-			return array_filter($top_ten_crit_array);
-		}
-		if (isset($seed['num_of_plots'])) {
-			for($i=0;$i<$seed['num_of_plots'];$i++) { $seed_num_array[] = $i ; }
-			return $seed_num_array;	
-		}
-	} else {
-		echo "No generation method found.";
-		die;
-	}
-}
 
 function hexGenerator() {
 	$hex_vals_array = array ( 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F ) ;
