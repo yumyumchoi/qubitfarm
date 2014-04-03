@@ -1,4 +1,5 @@
 <?php 
+
 $patch_img_path = '../img/patch_256x256_72dpi.png' ; 
 list($patch_width, $patch_height) = getimagesize($patch_img_path);
 $qubit_img_path = '../img/qubit_48x48_72dpi.png' ; 

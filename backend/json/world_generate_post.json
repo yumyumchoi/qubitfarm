@@ -6,11 +6,7 @@
     "uri": "ds031347.mongolab.com:31347",
     "world_index": 23,
     "world_prefix": "qfw",
-    "num_of_plots": 15,
-    "plot_scale": {
-        "min": 16,
-        "max": 16
-    },
+    "num_of_plots": 1,
     "plot_dimensions" : {
     	"width": 4,
         "height": 4
@@ -27,12 +23,8 @@
         "min": 0,
         "max": 1
     },
-    "quit_growth_rate": {
+    "qubit_growth_rate": {
         "min": 1,
         "max": 100
-    },
-    "bonus_probability": {
-        "min": 1,
-        "max": 10000
     }
 }

@@ -1,0 +1,85 @@
+{
+	"_id" : "qfw1798c28cc5261ba12633abf9e0614293e",
+	"index" : 99,
+	"plots_total_in_world" : 100,
+	"qubits_total_in_world" : 1065750,
+	"date_generated_ep" : "1396499560",
+	"date_generated_hr" : "Thu, 03 Apr 2014 00:32:40 -0400",
+	"plot_style" : {
+		"color" : [
+			"B0A9BFB",
+			"A4D8F69"
+		]
+	},
+	"plot_parameters" : {
+		"qubits_availible_in_plot" : 8250,
+		"qubits_total_in_plot" : 8250,
+		"plot_dimensions" : [
+			4,
+			4
+		],
+		"plot_size" : 6,
+		"plot_layout" : [
+			{
+				"patch_index" : 0,
+				"patch_coords" : [
+					0,
+					0
+				],
+				"qubit_growth_rate" : 66,
+				"qubits_availible_in_patch" : 750,
+				"qubits_total_in_patch" : 750
+			},
+			{
+				"patch_index" : 2,
+				"patch_coords" : [
+					0,
+					2
+				],
+				"qubit_growth_rate" : 37,
+				"qubits_availible_in_patch" : 500,
+				"qubits_total_in_patch" : 500
+			},
+			{
+				"patch_index" : 3,
+				"patch_coords" : [
+					0,
+					3
+				],
+				"qubit_growth_rate" : 65,
+				"qubits_availible_in_patch" : 1750,
+				"qubits_total_in_patch" : 1750
+			},
+			{
+				"patch_index" : 9,
+				"patch_coords" : [
+					2,
+					1
+				],
+				"qubit_growth_rate" : 29,
+				"qubits_availible_in_patch" : 2250,
+				"qubits_total_in_patch" : 2250
+			},
+			{
+				"patch_index" : 10,
+				"patch_coords" : [
+					2,
+					2
+				],
+				"qubit_growth_rate" : 47,
+				"qubits_availible_in_patch" : 750,
+				"qubits_total_in_patch" : 750
+			},
+			{
+				"patch_index" : 15,
+				"patch_coords" : [
+					3,
+					3
+				],
+				"qubit_growth_rate" : 53,
+				"qubits_availible_in_patch" : 2250,
+				"qubits_total_in_patch" : 2250
+			}
+		]
+	}
+}
