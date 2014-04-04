@@ -48,9 +48,15 @@ function worldGenerator($seed) {
 				}
 			}
 			
+			$names_array = explode(",",file_get_contents('../csv/elements.csv'));
+			$random_index = rand(0,sizeof($names_array)-1);
+			$random_name = $names_array[$random_index];
+			
 			$world[] = array(
 	    		"_id" => $world_collection.md5($world_collection.$i),
+				"name" => $random_name,
 	    		"index" => $i,
+				"owner_id" => null,
 	    		"plots_total_in_world" => $seed['num_of_plots'],
 				"qubits_total_in_world" => 0,
 				"date_generated_ep" => date('U'),

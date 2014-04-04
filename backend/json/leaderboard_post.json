@@ -1,0 +1,11 @@
+{
+	"publish" : true,
+    "database": "qubitfarm",
+    "username": "qubitfarmer",
+    "password": "killmedaddy",
+    "uri" : "ds031347.mongolab.com:31347",
+    "world_index": 1,
+	"uid" : "qfu1a736aa69d5a0e4f2df9e30cd9ac8d795",
+  	"num_of_leaders" : 10,
+  	"sort_order" : "highest to lowest"
+}

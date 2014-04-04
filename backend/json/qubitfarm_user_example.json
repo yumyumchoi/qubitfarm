@@ -1,17 +1,16 @@
 {
-    "_id": "qfu1798c28cc5261ba12633abf9e0614293e", 
-	"user_index" : 23,
-    "current_num_of_qubits": 3834, 
+    "_id": "qubitfarm.qfu4dbfb6bba5362f1adfefef93dae5a7e0e", 
+    "current_num_of_qubits": "qfw406410c6076f925cc886ac4f0886353c9", 
     "plots": [
         {
-			"date_added_ep" : "1396499560",
-			"date_generated_hr" : "Thu, 03 Apr 2014 00:32:40 -0400",
-            "patch_id": "qfw1798c28cc5261ba12633abf9e0614293e"
-        }, 
-        {
-			"date_added_ep" : "139649456",
-			"date_generated_hr" : "Thu, 24 Mar 2014 01:25:12 -0400",
-            "patch_id": "qfw13866793434d74b8a156c4d499770c12b"
+            "date_added_ep": "1396553424", 
+            "date_generated_hr": "Thu, 03 Apr 2014 15:30:24 -0400", 
+            "plot_id": "qfw406410c6076f925cc886ac4f0886353c9"
         }
-    ]
+    ], 
+    "user_index": 1, 
+    "world_collection": {
+        "w": 1, 
+        "wtimeout": 10000
+    }
 }
