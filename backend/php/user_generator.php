@@ -38,7 +38,7 @@ function userGenerator($seed) {
 	$user = array(
 		"_id" => $new_uid,
 		"name" => $random_name,
-		"user_index" => $current_index,
+		"index" => $current_index,
 		"world_collection" => $world_collection_prefix,
 		"current_num_of_qubits" => $first_plot_qubits, 
 		"plots" => array(

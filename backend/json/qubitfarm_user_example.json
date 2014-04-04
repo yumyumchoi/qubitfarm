@@ -1,16 +1,14 @@
 {
-    "_id": "qubitfarm.qfu4dbfb6bba5362f1adfefef93dae5a7e0e", 
-    "current_num_of_qubits": "qfw406410c6076f925cc886ac4f0886353c9", 
-    "plots": [
-        {
-            "date_added_ep": "1396553424", 
-            "date_generated_hr": "Thu, 03 Apr 2014 15:30:24 -0400", 
-            "plot_id": "qfw406410c6076f925cc886ac4f0886353c9"
-        }
-    ], 
-    "user_index": 1, 
-    "world_collection": {
-        "w": 1, 
-        "wtimeout": 10000
-    }
+	"_id" : "qfu1bfcb852f6f7986c0f4d5616a041e163f",
+	"name" : "Dr. Julius Hibbert",
+	"index" : 12,
+	"world_collection" : "qfw1",
+	"current_num_of_qubits" : 13500,
+	"plots" : [
+		{
+			"date_added_ep" : "1396588532",
+			"date_generated_hr" : "Fri, 04 Apr 2014 01:15:32 -0400",
+			"plot_id" : "qfw1672b855b8b20ca98e9b2b06e03573159"
+		}
+	]
 }
