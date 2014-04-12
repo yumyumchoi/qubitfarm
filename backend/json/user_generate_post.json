@@ -1,9 +1,6 @@
 {
-	"publish" : true,
-    "database": "qubitfarm",
-    "username": "qubitfarmer",
-    "password": "killmedaddy",
-    "uri": "ds031347.mongolab.com:31347",
-    "world_index": 1,
-    "user_prefix": "qfu"
+    "header": {
+        "method": "create user",
+        "world_index": 1
+    }
 }

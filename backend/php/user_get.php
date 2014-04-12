@@ -2,34 +2,35 @@
 
 // ---------------------------------------------------------------------------------------------------- //
 
-header('Content-type: application/json');
-date_default_timezone_set('America/New_York');
-$json_request = file_get_contents('php://input');
-$seed = json_decode($json_request,true);
+$uid = $seed['body']['uid'];
 
-// ---------------------------------------------------------------------------------------------------- //
+// ERROR - NOT SET
+if ($uid == "" || $uid == null) { $user_search['error'] = "Cannot search: 'uid' is not defined" ; } else {
 
-$database = $seed['database'];
-$user_collection_prefix = $seed['user_prefix'].$seed['world_index'];
-$world_collection_prefix = 'qfw'.$seed['world_index'];
-$server = 'mongodb://'.$seed['username'].':'.$seed['password'].'@'.$seed['uri'].'/'.$database;
-$connection = new MongoClient($server);
-$user_collection = $connection->$database->$user_collection_prefix;
-$world_collection = $connection->$database->$world_collection_prefix;
+	if (is_array($uid)) { 
+		
+		// MULTI
+		foreach($uid as $uids) {
+			$user_info = $user_collection->find(array("_id" => $uids));
+	
+			foreach($user_info as $k => $v) {
+				$user_search[] = $v;
+			}
+		}
+	
+	} else {
+	
+		// SINGLE
+		$user_info = $user_collection->find(array("_id" => $uid));
+		foreach($user_info as $k => $v) { $user_search[] = $v; }
+	}
 
-$uid = $seed['uid'];
-$user_info = $user_collection->find(array("_id" => $uid));
-
-foreach($user_info as $k => $v) {
-	$id = $v['_id'];
-	$name = $v['name'];
-	$index = $v['index'];
-	$world = $v['world_collection'];
-	$current_num_of_qubits = $v['current_num_of_qubits'];
-	$plots = $v['plots'];
+	// ERROR - NOT FOUND
+	if ($user_search == null) { $user_search['error'] = "User not found" ; }
+	
 }
 
-echo json_encode($v);
+echo json_encode($user_search);
 
 // ---------------------------------------------------------------------------------------------------- //
 

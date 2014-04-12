@@ -1,9 +1,12 @@
 {
-    "database": "qubitfarm",
-    "username": "qubitfarmer",
-    "password": "killmedaddy",
-    "uri": "ds031347.mongolab.com:31347",
-    "world_index": 1,
-    "user_prefix": "qfu",
-    "uid" : "qfu1a99e4a17137364381b775c2ce71da636"
+    "header": {
+		"method" : "get user",
+    	"world_index": 1
+	},
+    "body": {
+        "uid": [
+            "qfu176bce9ec6de6fbba8e68bf826ee73c3b",
+            "qfu16159a2afcea4669d496289d0c4263aff"
+        ]
+    }
 }
