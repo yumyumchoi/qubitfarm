@@ -96,7 +96,7 @@ foreach($plots['result'] as $k => $v) {
 	$plot_result[$c]['qubits_availible_in_plot'] = $v['plot_parameters']['qubits_availible_in_plot'];
 	$plot_result[$c]['qubits_total_in_plot'] = $v['plot_parameters']['qubits_total_in_plot'];
 	//$plot_result[$c]['plot_dimensions'] = $v['plot_parameters']['plot_dimensions'];
-	$plot_result[$c]['num_of_patches'] = $v['plot_parameters']['plot_size	'];
+	$plot_result[$c]['num_of_patches'] = $v['plot_parameters']['plot_size'];
 	//$plot_result[$c]['plot_layout'] = $v['plot_parameters']['plot_layout'];
 }
 
