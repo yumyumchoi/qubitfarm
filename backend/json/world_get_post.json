@@ -1,10 +1,5 @@
 {
-    "database": "qubitfarm",
-    "username": "qubitfarmer",
-    "password": "killmedaddy",
-    "uri": "ds031347.mongolab.com:31347",
     "world_index": 1,
-    "user_prefix": "qfu",
     "user_search" : "all",
     "sortby" : "qubits,most to least",
     "start" : 0,
