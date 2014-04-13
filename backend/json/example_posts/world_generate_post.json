@@ -1,0 +1,30 @@
+{
+    "header": {
+        "method": "create world",
+        "world_index": 1,
+        "publish": true
+    },
+    "body": {
+        "num_of_plots": 100,
+        "plot_dimensions": {
+            "width": 4,
+            "height": 4
+        },
+        "qubit_range_plot": {
+            "factor": 1,
+            "base": 250,
+            "range": [
+                1,
+                10
+            ]
+        },
+        "qubit_range_patch": {
+            "min": 0,
+            "max": 1
+        },
+        "qubit_growth_rate": {
+            "min": 1,
+            "max": 100
+        }
+    }
+}

@@ -8,6 +8,7 @@ $world_count = $world_collection->count();
 $plot_search = $world_collection->find(array("owner_id" => null));
 foreach($plot_search as $k => $v) {
 	$first_plot_id = $v['_id'];
+	$first_plot_name = $v['name'];
 	$first_plot_qubits = $v["plot_parameters"]["qubits_total_in_plot"];
 	break;
 }
@@ -15,7 +16,7 @@ foreach($plot_search as $k => $v) {
 if ($first_plot_id == null) { echo json_encode(array("error" => "No plots left in world.")); die; }
 $new_uid = $user_collection_prefix.md5($user_collection_prefix.$current_index);
 
-$names_array = explode(",",file_get_contents('../csv/simpsons.csv'));
+$names_array = explode(",",file_get_contents($config['sources']['user_names']));
 $random_index = rand(0,sizeof($names_array)-1);
 $random_name = $names_array[$random_index];
 
@@ -29,19 +30,14 @@ $user = array(
 		(object) array(
 			"date_added_ep" => date("U"),
 			"date_generated_hr" => date("r"),
-            "plot_id" => $first_plot_id
+            "plot_id" => $first_plot_id,
+			"plot_name" => $first_plot_name
 		)
 	)
 );
 
 $user_collection->insert($user); 	
-$world_collection->update(
-	array("_id" => $first_plot_id),
-	array('$set' => array(
-		"owner_id" => $new_uid
-		)
-	)
-); 
+$world_collection->update(array( "_id" => $first_plot_id ),array( '$set' => array( "owner_id" => $new_uid )));
  
 echo json_encode($user);
 

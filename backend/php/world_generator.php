@@ -33,7 +33,7 @@ if ($collection_exists == 1 && $seed['header']['publish'] == true) { echo $world
 			}
 		}
 		
-		$names_array = explode(",",file_get_contents('../csv/elements.csv'));
+		$names_array = explode(",",file_get_contents($config['sources']['world_names']));
 		$random_index = rand(0,sizeof($names_array)-1);
 		$random_name = $names_array[$random_index];
 		

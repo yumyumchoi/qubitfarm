@@ -4,22 +4,22 @@
 
 header('Content-type: application/json');
 date_default_timezone_set('America/New_York');
+$config = json_decode(file_get_contents('json/config.json'),true);
 $json_request = file_get_contents('php://input');
 $seed = json_decode($json_request,true);
 
-$database = "qubitfarm";
-$username = "qubitfarmer";
-$password = "killmedaddy";
-$uri = "ds031347.mongolab.com:31347";
+$database = $config['database']['name'];;
+$username = $config['database']['username'];;
+$password = $config['database']['password'];;
+$uri = $config['database']['uri'];;
 $server = 'mongodb://'.$username.':'.$password.'@'.$uri.'/'.$database;
 $connection = new MongoClient($server);
 $header = $seed['header'];
 $body = $seed['body'];
 
 $world_index = $seed['header']['world_index'];
-
-$user_collection_prefix = 'qfu'.$world_index;
-$world_collection_prefix = 'qfw'.$world_index;
+$world_collection_prefix = $config['vars']['world_prefix'].$world_index;
+$user_collection_prefix = $config['vars']['user_prefix'].$world_index;
 
 $user_collection = $connection->$database->$user_collection_prefix;
 $world_collection = $connection->$database->$world_collection_prefix;
@@ -45,11 +45,12 @@ function hexGenerator() {
 
 // CHECK FOR WORLD
 if ($header['method'] == "create world") { } else {
-	if (getOne($user_collection) == null) {
-		$query_result['error'] = "User collection ".$world_index." does not exists" ; 
-	}
 	if (getOne($world_collection) == null) {
-		$query_result['error'] = "World collection ".$world_index." does not exists" ;
+		$query_result['error'] = "World collection ".$world_index." does not exist or is empty" ;
+	}
+	if (getOne($user_collection) == null) {
+		$query_result['error'] = "User collection ".$world_index." does not exist or is empty" ; 
+		// CREATE COLLECITON IF WORLD EXISTS // REDEFINE IF WORLD EMPTY
 	}
 }
 
