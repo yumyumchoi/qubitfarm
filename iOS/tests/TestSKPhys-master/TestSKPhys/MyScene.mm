@@ -88,9 +88,6 @@ float boxHeight = BIG_BOX_HEIGHT;
         b2Body *boundary = world->CreateBody(&boundaryDef);
         boundary->CreateFixture(&chain, 0);
         
-        // Create contact listener
-//        _contactListener = new MyContactListener();
-//        _world->SetContactListener(_contactListener);
 #else
         NSLog(@"SKPhysics Elastic - %d boxes", NUM_BOXES);
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
@@ -128,19 +125,12 @@ float boxHeight = BIG_BOX_HEIGHT;
 
 
 - (void)addBoxAtX:(float )x Y:(float)y Size:(CGSize)size {
-//#ifdef RANDOM_SIZE
-//    float newBoxWidth = arc4random_uniform(size.width*.8)+ (size.height*.2);
-//    SKSpriteNode *Box = [[SKSpriteNode alloc] initWithColor:[SKColor whiteColor] size:CGSizeMake(newBoxWidth,newBoxWidth)];
-//#else
     NSLog(@"new size %@",NSStringFromCGSize(size));
     SKSpriteNode *Box = [[SKSpriteNode alloc] initWithColor:[SKColor whiteColor] size:size];
-//#endif
     Box.position = CGPointMake(x, y);
-    
     Box.name = @"Box";
     
 #ifdef BOX2D
-    // Box2D
     
     b2BodyDef bodyDef;
     bodyDef.position.Set(Box.position.x / PIXELS_PER_METER, Box.position.y / PIXELS_PER_METER);
