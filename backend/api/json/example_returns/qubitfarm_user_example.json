@@ -1,0 +1,32 @@
+[
+    {
+        "_id": "qfu176bce9ec6de6fbba8e68bf826ee73c3b", 
+        "current_num_of_qubits": 12250, 
+        "index": 0, 
+        "name": "Martin Prince", 
+        "plots": [
+            {
+                "date_added_ep": "1397423862", 
+                "date_generated_hr": "Sun, 13 Apr 2014 17:17:42 -0400", 
+                "plot_id": "qfw16422c73808bf6ae4cc6e09196b833e49", 
+                "plot_name": "Rhenium"
+            }
+        ], 
+        "world_collection": "qfw1"
+    }, 
+    {
+        "_id": "qfu16159a2afcea4669d496289d0c4263aff", 
+        "current_num_of_qubits": 6750, 
+        "index": 4, 
+        "name": "Disco Stu", 
+        "plots": [
+            {
+                "date_added_ep": "1397423966", 
+                "date_generated_hr": "Sun, 13 Apr 2014 17:19:26 -0400", 
+                "plot_id": "qfw1cc686c46cc5cb477718a4ea0d59856ea", 
+                "plot_name": "Ruthenium"
+            }
+        ], 
+        "world_collection": "qfw1"
+    }
+]

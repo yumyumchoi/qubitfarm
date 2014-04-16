@@ -1,0 +1,59 @@
+{
+    "leaders": {
+        "1": {
+            "_id": "qfu18d49fb209bacf22b691a5c85cda862f5", 
+            "current_num_of_qubits": 4250, 
+            "name": "Otto Mann"
+        }, 
+        "10": {
+            "_id": "qfu122500a0768081216a57f24ffdc878de6", 
+            "current_num_of_qubits": 11750, 
+            "name": "The Happy Little Elves"
+        }, 
+        "2": {
+            "_id": "qfu16159a2afcea4669d496289d0c4263aff", 
+            "current_num_of_qubits": 6750, 
+            "name": "Disco Stu"
+        }, 
+        "3": {
+            "_id": "qfu102142ffcbe658df370d30c904ef15fea", 
+            "current_num_of_qubits": 8000, 
+            "name": "Coach Lugash"
+        }, 
+        "4": {
+            "_id": "qfu1aa8bcf52dd0fb2e92f48e68d0defa94f", 
+            "current_num_of_qubits": 8250, 
+            "name": "Boobarella"
+        }, 
+        "5": {
+            "_id": "qfu1a25591770e056e4622c891e3bfdf74fd", 
+            "current_num_of_qubits": 8750, 
+            "name": "Dave Shutton"
+        }, 
+        "6": {
+            "_id": "qfu1062307027f3615ea69c40410bf941989", 
+            "current_num_of_qubits": 9250, 
+            "name": "Waylon Smithers"
+        }, 
+        "7": {
+            "_id": "qfu1ef281c944afc5cb15228d2fb714790af", 
+            "current_num_of_qubits": 10000, 
+            "name": "Gino"
+        }, 
+        "8": {
+            "_id": "qfu1a736aa69d5a0e4f2df9e30cd9ac8d795", 
+            "current_num_of_qubits": 11500, 
+            "name": "Doug and Gary"
+        }, 
+        "9": {
+            "_id": "qfu19d450db6e58b4b7610a52c3929134e23", 
+            "current_num_of_qubits": 11500, 
+            "name": "Hans Moleman"
+        }
+    }, 
+    "player": {
+        "_id": "qfu1a736aa69d5a0e4f2df9e30cd9ac8d795", 
+        "current_num_of_qubits": 11500, 
+        "name": "Doug and Gary"
+    }
+}

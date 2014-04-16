@@ -1,6 +1,6 @@
 {
 	"header" : {
-		"method" : "get plot",
+		"method" : "get plots",
 		"world_index": 1
 	},
 	"body" : {
