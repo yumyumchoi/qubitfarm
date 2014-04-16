@@ -4,9 +4,9 @@ $(document).ready( function() {
 	$('#button').click( function(){
 		$('#button').css({"opacity":0,"display":"none"});
 		$('#returned').text('Loading...');
-		$('#posted').css({"opacity":0});
+		$('#returned').css({"opacity":1});
+		$('#posted').css({"opacity":1});
 		var thePost = $('#post').val();
-		$('#posted').animate({"opacity":1},250);
 		$('#posted').html('<b>Post // '+new Date()+'</b><pre>'+thePost+'</pre>');
 		getData(thePost);
 	});

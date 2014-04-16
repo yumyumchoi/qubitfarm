@@ -16,7 +16,14 @@ if (isset($user_search)) {
 		if ($user_search == 'unowned') { $query[] = array('$match' => array("owner_id" => null)) ; }
 		if ($user_search == 'owned') { $query[] = array('$match' => array("owner_id" => array('$regex' => '.*'))) ; }
 	} else {
-		$query[] = array('$match' => array("owner_id" => $user_search)) ;
+		// PLOT
+		if (substr($user_search,0,3) == "qfw") {
+			$query[] = array('$match' => array("_id" => $user_search)) ;
+		}
+		// USER
+		if (substr($user_search,0,3) == "qfu") {
+			$query[] = array('$match' => array("owner_id" => $user_search)) ;
+		}
 	}
 } else {
 	

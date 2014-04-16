@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Qubit Farm // API Test</title>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" href="css/qubitfarm.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="js/qubitfarm.js"></script>
