@@ -2,39 +2,29 @@
 
 // ---------------------------------------------------------------------------------------------------- //
 
-header('Content-type: application/json');
-date_default_timezone_set('America/New_York');
-$json_request = file_get_contents('php://input');
-$seed = json_decode($json_request,true);
-
-// ---------------------------------------------------------------------------------------------------- //
-
-$database = $seed['database'];
-$user_collection_prefix = $seed['user_prefix'].$seed['world_index'];
-$world_collection_prefix = 'qfw'.$seed['world_index'];
-$server = 'mongodb://'.$seed['username'].':'.$seed['password'].'@'.$seed['uri'].'/'.$database;
-$connection = new MongoClient($server);
-$user_collection = $connection->$database->$user_collection_prefix;
-$world_collection = $connection->$database->$world_collection_prefix;
+$user_search = $seed['body']['user_search'];
+$sort_by_post = $seed['body']['sortby'];
+$skip_post = $seed['body']['start'];
+$limit_post = $seed['body']['limit'];
 
 $query = array();
 
 // FILTER
-if (isset($seed['user_search'])) {
-	if ($seed['user_search'] == 'all' || $seed['user_search'] == 'owned' || $seed['user_search'] == 'unowned') { 
-		if ($seed['user_search'] == 'all') { }
-		if ($seed['user_search'] == 'unowned') { $query[] = array('$match' => array("owner_id" => null)) ; }
-		if ($seed['user_search'] == 'owned') { $query[] = array('$match' => array("owner_id" => array('$regex' => '.*'))) ; }
+if (isset($user_search)) {
+	if ($user_search == 'all' || $user_search == 'owned' || $user_search == 'unowned') { 
+		if ($user_search == 'all') { }
+		if ($user_search == 'unowned') { $query[] = array('$match' => array("owner_id" => null)) ; }
+		if ($user_search == 'owned') { $query[] = array('$match' => array("owner_id" => array('$regex' => '.*'))) ; }
 	} else {
-		$query[] = array('$match' => array("owner_id" => $seed['user_search'])) ;
+		$query[] = array('$match' => array("owner_id" => $user_search)) ;
 	}
 } else {
 	
 }
 
 // SORT
-if (isset($seed['sortby'])) {
-	$sort_get = $seed['sortby']; $sort = explode(",",$sort_get);
+if (isset($sort_by_post)) {
+	$sort_get = $sort_by_post; $sort = explode(",",$sort_get);
 	$sort_by = $sort[0]; if ($sort_by == "qubits") { 
 		$sort_by = "plot_parameters.qubits_availible_in_plot"; 
 	}
@@ -47,9 +37,9 @@ if (isset($seed['sortby'])) {
 
 // SKIP
 $default_skip = 0;
-if (isset($seed['start'])) {
-	if (is_numeric($seed['start'])) {
-		$query[] = array('$skip' => $seed['start']);
+if (isset($skip_post)) {
+	if (is_numeric($skip_post)) {
+		$query[] = array('$skip' => $skip_post);
 	} else {
 		$error_msg = "The value for 'start' must be an integer.";
 		echo json_encode(array("error" => $error_msg)); die;
@@ -60,14 +50,14 @@ if (isset($seed['start'])) {
 
 // LIMIT
 $default_limit = 8;
-if (isset($seed['limit'])) {
-	if ($seed['limit'] == "none") { 
+if (isset($limit_post)) {
+	if ($limit_post == "none") { 
 		$plot_get_one = $world_collection->findOne(array());
 		$plot_count = $plot_get_one['plots_total_in_world'];
 		$query[] = array('$limit' => $plot_count);
 	} else {
-		if (is_numeric($seed['limit'])) {
-			$query[] = array('$limit' => $seed['limit']);
+		if (is_numeric($limit_post)) {
+			$query[] = array('$limit' => $limit_post);
 		} else {
 			$error_msg = "The value for 'limit' must be an integer or operator like 'none'.";
 			echo json_encode(array("error" => $error_msg)); die;

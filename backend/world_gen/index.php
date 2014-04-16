@@ -1,1 +1,0 @@
-<?php include('../php/world_generator.php'); ?>

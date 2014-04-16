@@ -68,6 +68,7 @@ if (isset($query_result)) { echo json_encode($query_result); die; }
 
 // CALL METHODS
 if ($header['method'] == "get user") { include('php/user_get.php'); }
+if ($header['method'] == "get plots") { include('php/world_get.php'); }
 if ($header['method'] == "leaderboard") { include('php/leaderboard.php'); }
 if ($header['method'] == "create user") { include('php/user_generator.php'); }
 if ($header['method'] == "create world") { include('php/world_generator.php'); }
