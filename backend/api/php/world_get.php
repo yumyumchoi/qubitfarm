@@ -2,31 +2,31 @@
 
 // ---------------------------------------------------------------------------------------------------- //
 
-$user_search = $seed['body']['user_search'];
+$search = $seed['body']['search'];
 $sort_by_post = $seed['body']['sortby'];
 $skip_post = $seed['body']['start'];
 $limit_post = $seed['body']['limit'];
 
 $query = array();
 
-// FILTER
-if (isset($user_search)) {
-	if ($user_search == 'all' || $user_search == 'owned' || $user_search == 'unowned') { 
-		if ($user_search == 'all') { }
-		if ($user_search == 'unowned') { $query[] = array('$match' => array("owner_id" => null)) ; }
-		if ($user_search == 'owned') { $query[] = array('$match' => array("owner_id" => array('$regex' => '.*'))) ; }
+// SEARCH
+if (isset($search)) {
+	if ($search == 'all' || $search == 'owned' || $search == 'unowned') { 
+		if ($search == 'all') { }
+		if ($search == 'unowned') { $query[] = array('$match' => array("owner_id" => null)) ; }
+		if ($search == 'owned') { $query[] = array('$match' => array("owner_id" => array('$regex' => '.*'))) ; }
 	} else {
 		// PLOT
-		if (substr($user_search,0,3) == "qfw") {
-			$query[] = array('$match' => array("_id" => $user_search)) ;
+		if (substr($search,0,3) == "qfw") {
+			$query[] = array('$match' => array("_id" => $search)) ;
 		}
 		// USER
-		if (substr($user_search,0,3) == "qfu") {
-			$query[] = array('$match' => array("owner_id" => $user_search)) ;
+		if (substr($search,0,3) == "qfu") {
+			$query[] = array('$match' => array("owner_id" => $search)) ;
 		}
 	}
 } else {
-	
+	echo json_encode(array("error" => "Must provide 'search' parameter.  For example, 'all', 'owned','unowned' or _id for plot or user.")); die;
 }
 
 // SORT

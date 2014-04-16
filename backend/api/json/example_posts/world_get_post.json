@@ -4,7 +4,7 @@
 		"world_index": 1
 	},
 	"body" : {
-	    "user_search" : "all",
+	    "search" : "all",
 	    "sortby" : "qubits,most to least",
 	    "start" : 0,
 	    "limit" : 8	
