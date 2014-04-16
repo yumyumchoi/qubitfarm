@@ -6,6 +6,7 @@ $search = $seed['body']['search'];
 $sort_by_post = $seed['body']['sortby'];
 $skip_post = $seed['body']['start'];
 $limit_post = $seed['body']['limit'];
+$full = $seed['body']['full'];
 
 $query = array();
 
@@ -92,9 +93,10 @@ foreach($plots['result'] as $k => $v) {
 	$plot_result[$c]['color'] = $v['plot_style']['color'];
 	$plot_result[$c]['qubits_availible_in_plot'] = $v['plot_parameters']['qubits_availible_in_plot'];
 	$plot_result[$c]['qubits_total_in_plot'] = $v['plot_parameters']['qubits_total_in_plot'];
-	//$plot_result[$c]['plot_dimensions'] = $v['plot_parameters']['plot_dimensions'];
+	if ($full == true) { $plot_result[$c]['plot_dimensions'] = $v['plot_parameters']['plot_dimensions']; } else { }
 	$plot_result[$c]['num_of_patches'] = $v['plot_parameters']['plot_size'];
-	//$plot_result[$c]['plot_layout'] = $v['plot_parameters']['plot_layout'];
+	if ($full == true) { $plot_result[$c]['plot_layout'] = $v['plot_parameters']['plot_layout']; } else { }
+	
 }
 
 echo json_encode($plot_result);
