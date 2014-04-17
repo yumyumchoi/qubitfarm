@@ -5,7 +5,7 @@
 $uid = $seed['body']['uid'];
 
 // ERROR - NOT SET
-if ($uid == "" || $uid == null) { $user_search['error'] = "Cannot search: 'uid' is not defined" ; } else {
+if ($uid == "" || $uid == null) { echo "Cannot search: 'uid' is not defined" ; die; } else {
 
 	if (is_array($uid)) { 
 		

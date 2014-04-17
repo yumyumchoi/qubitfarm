@@ -1,8 +1,12 @@
 html {
 	font-family:Helvetica,Sans-serif;
+	overflow:scroll;
 }
 body {
-	margin : 25;
+	text-align:center;
+}
+#actions {
+	position:relative;
 }
 #button {
 	color:#999;
@@ -13,6 +17,9 @@ body {
 	border:solid 1px #ccc;
 	border-radius:5;
 	font-weight:bold;
+	position:relative;
+	float:right;
+	top:-10;
 }
 #button:hover {
 	background-color:#f8f8f8;
@@ -23,8 +30,8 @@ body {
 	border:solid 1px #0066FF;
 }
 #post {
-	background-color : #f8f8f8 ;
-	width:800;
+	background-color : #FFFFF0 ;
+	width:1000;
 	height:200;
 	margin:10 0;
 	padding:10;
@@ -34,21 +41,25 @@ body {
 	margin: 1em 0px;
 	font-size:12;
 	font-weight:bold;
+	border:1px #999 solid;
 }
 #post:focus {
-	background-color : #f4cccc ;
+	background-color : #FFFFF0 ;
 	outline:none;
 }
+#posted {
+	height:16;
+	overflow:hidden;
+	cursor:pointer;
+}
 #posted,#returned {
-	background-color : #ccc;
+	background-color : #f3f3f3;
 	padding:10;
-	width:780;
+	width:980;
 	margin:10 0;
 	opacity:0;
 	word-wrap:break-word;
-}
-#returned {
-	background-color : #ead1dc;
+	border:1px #999 solid;
 }
 a {
 	font-size:12;
@@ -58,4 +69,31 @@ a {
 }
 a:hover {
 	text-decoration:underline;
+}
+h1 {
+	font-size:24;
+	font-weight:bold;
+	margin:0;
+}
+#main {
+	text-align:left;
+	width:1000;
+	margin: 50 auto; 
+}
+#iframe-box {
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(255,255,255,0.8);
+	text-align:center;
+}
+iframe {
+	display:block;
+	margin: 35 auto;
+	width:820;
+	height:90%;
+	border:1px solid #ccc;
+	box-shadow:0px 5px 20px #ccc;
 }

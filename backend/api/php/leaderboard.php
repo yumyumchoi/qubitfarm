@@ -5,7 +5,7 @@
 $uid = $seed['body']['uid'];
 
 // ERROR - NOT SET
-if ($uid == "" || $uid == null) { $leader_board['error'] = "Cannot search: 'uid' is not defined." ; } else {
+if ($uid == "" || $uid == null) { echo "Cannot search: 'uid' is not defined." ; die; } else {
 
 	// SEARCH FOR PLAYER
 	$uid_find = $user_collection->find(array('_id' => $uid));
@@ -15,7 +15,7 @@ if ($uid == "" || $uid == null) { $leader_board['error'] = "Cannot search: 'uid'
 		$leader_board['player']['current_num_of_qubits'] = $v['current_num_of_qubits'];
 	}
 	
-	if ($leader_board == null) { $leader_board['error'] = "Query Cancelled: player 'uid' could not be found." ; } else {
+	if ($leader_board == null) { echo "Query Cancelled: player 'uid' could not be found." ; die; } else {
 
 		// LIMIT LEADERS
 		if (isset($seed['body']['num_of_leaders'])) { 

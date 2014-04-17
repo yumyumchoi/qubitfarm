@@ -24,6 +24,8 @@ $user_collection_prefix = $config['vars']['user_prefix'].$world_index;
 $user_collection = $connection->$database->$user_collection_prefix;
 $world_collection = $connection->$database->$world_collection_prefix;
 
+$method = $header['method'];
+
 // ---------------------------------------------------------------------------------------------------- //
 
 function getOne($theCollection) {
@@ -43,35 +45,33 @@ function hexGenerator() {
 
 // ---------------------------------------------------------------------------------------------------- //
 
-// CHECK FOR WORLD
-if ($header['method'] == "create world") { } else {
-	if (getOne($world_collection) == null) {
-		$query_result['error'] = "World collection ".$world_index." does not exist or is empty" ;
-	}
-	if (getOne($user_collection) == null) {
-		$query_result['error'] = "User collection ".$world_index." does not exist or is empty" ; 
-		// CREATE COLLECITON IF WORLD EXISTS // REDEFINE IF WORLD EMPTY
-	}
-}
+// CHECK BODY
+if (isset($body) || $method == "create user") { } else { echo "Parameters of 'body' are either undefined or malformed." ; die; } 
 
 // CHECK HEADERS
 $request_array = array("get user","get plots","leaderboard","create world","create user");
-if (!in_array($header['method'],$request_array)) { $query_result['error'] = "Unknown method '".$header['method']. "'. Use => '".implode("','",$request_array)."'" ; }
+if (!in_array($method,$request_array)) { echo "Unknown method '".$method. "'. Use => '".implode("','",$request_array)."'" ;die; }
 
-// CHECK BODY
-if (isset($body) || $header['method'] == "create user") { } else { $query_result['error'] = "Parameters of 'body' are either undefined or malformed." ; } 
-
-// ERROR MESSAGE
-if (isset($query_result)) { echo json_encode($query_result); die; } 
+// CHECK FOR WORLD
+if ($method == "create world") { } else {
+	if (getOne($world_collection) == null) {
+		echo "World collection ".$world_index." does not exist or is empty" ; die;
+	}
+	if (getOne($user_collection) == null) {
+		if ($method == "create user") { } else {
+			echo "User collection ".$world_index." does not exist or is empty" ; die;
+		}
+	}
+}
 
 // ---------------------------------------------------------------------------------------------------- //
 
 // CALL METHODS
-if ($header['method'] == "get user") { include('php/user_get.php'); }
-if ($header['method'] == "get plots") { include('php/world_get.php'); }
-if ($header['method'] == "leaderboard") { include('php/leaderboard.php'); }
-if ($header['method'] == "create user") { include('php/user_generator.php'); }
-if ($header['method'] == "create world") { include('php/world_generator.php'); }
+if ($method == "get user") { include('php/user_get.php'); }
+if ($method == "get plots") { include('php/world_get.php'); }
+if ($method == "leaderboard") { include('php/leaderboard.php'); }
+if ($method == "create user") { include('php/user_generator.php'); }
+if ($method == "create world") { include('php/world_generator.php'); }
 
 // ---------------------------------------------------------------------------------------------------- //
 	

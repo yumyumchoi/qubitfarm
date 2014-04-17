@@ -13,16 +13,16 @@ foreach($plot_search as $k => $v) {
 	break;
 }
 
-if ($first_plot_id == null) { echo json_encode(array("error" => "No plots left in world.")); die; }
+if ($first_plot_id == null) { echo "No plots left in world."; die; }
 $new_uid = $user_collection_prefix.md5($user_collection_prefix.$current_index);
 
 $names_array = explode(",",file_get_contents($config['sources']['user_names']));
 $random_index = rand(0,sizeof($names_array)-1);
-$random_name = $names_array[$random_index];
+if (isset($seed['body']['name'])) { $name = $seed['body']['name'] ; } else { $name = $names_array[$random_index]; }
 
 $user = array(
 	"_id" => $new_uid,
-	"name" => $random_name,
+	"name" => $name,
 	"index" => $current_index,
 	"world_collection" => $world_collection_prefix,
 	"current_num_of_qubits" => $first_plot_qubits, 

@@ -27,7 +27,7 @@ if (isset($search)) {
 		}
 	}
 } else {
-	echo json_encode(array("error" => "Must provide 'search' parameter.  For example, 'all', 'owned','unowned' or _id for plot or user.")); die;
+	echo "Must provide 'search' parameter.  For example, 'all', 'owned','unowned' or _id for plot or user."; die;
 }
 
 // SORT
@@ -49,8 +49,7 @@ if (isset($skip_post)) {
 	if (is_numeric($skip_post)) {
 		$query[] = array('$skip' => $skip_post);
 	} else {
-		$error_msg = "The value for 'start' must be an integer.";
-		echo json_encode(array("error" => $error_msg)); die;
+		echo "The value for 'start' must be an integer."; die;
 	}
 } else {
 	$query[] = array('$skip' => $default_skip);
@@ -67,8 +66,7 @@ if (isset($limit_post)) {
 		if (is_numeric($limit_post)) {
 			$query[] = array('$limit' => $limit_post);
 		} else {
-			$error_msg = "The value for 'limit' must be an integer or operator like 'none'.";
-			echo json_encode(array("error" => $error_msg)); die;
+			echo "The value for 'limit' must be an integer or operator like 'none'."; die;
 		}
 	}
 } else {

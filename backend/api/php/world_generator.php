@@ -72,8 +72,15 @@ if ($collection_exists == 1 && $seed['header']['publish'] == true) { echo $world
 			array('$set' => array('qubits_total_in_world' => $total_qubits_in_world_sum )),
 			array("multiple" => true)
 		);
-
-		echo $world_collection_prefix. ' was created!'; 
+		
+		$success_message = array(
+						"success" => array(
+							"world_db" => $world_collection_prefix. ' was created!',
+							"user_db" => $user_collection_prefix. ' was created!'
+						)
+					); 
+					
+		echo json_encode($success_message);
 	} 
 	elseif ($seed['header']['publish'] == false) { 
 		echo json_encode($world); // SINGLE

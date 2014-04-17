@@ -7,6 +7,7 @@
 	    "search" : "all",
 	    "sortby" : "qubits,most to least",
 	    "start" : 0,
-	    "limit" : 8	
+	    "limit" : 8,
+		"full" : false
 	}
 }
