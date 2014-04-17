@@ -9,11 +9,11 @@
 #import "MyScene.h"
 #import <Box2D.h>
 
-//#define BOX2D
+#define BOX2D
 #define NUM_BOXES (0)
 #define PIXELS_PER_METER (150)
 #define SMALL_BOX_WIDTH (10)
-#define BIG_BOX_WIDTH (50)
+#define BIG_BOX_WIDTH (10)
 #define SMALL_BOX_HEIGHT (SMALL_BOX_WIDTH / 1)
 #define BIG_BOX_HEIGHT (BIG_BOX_WIDTH / 1)
 #define ANGULAR_VELOCITY (0)
@@ -23,17 +23,17 @@
 #define FRICTION (0.1)
 #define RESTITUTION (0.1)
 #define GRAVITY (-1.5)
-#define EPSILON (0)//.05)
-#define RANDOM_SIZE
+#define EPSILON (.05)
+//#define RANDOM_SIZE
 //#define GRID_LAYOUT_FOR_CREATION
 
 float boxWidth = BIG_BOX_WIDTH;
 float boxHeight = BIG_BOX_HEIGHT;
 
 @implementation MyScene {
-    b2World *world;
-    double accumulator;
-    double timeStep;
+    b2World *_world;
+    double _accumulator;
+    double _timeStep;
     double prevTime;
     int frameCount;
     float g;
@@ -42,14 +42,15 @@ float boxHeight = BIG_BOX_HEIGHT;
     double physicsEndTime;
     double simualtionTime;
     double sampleStartTime;
-    
+    NSMutableArray *_boxes;
+    NSMutableArray *_bodyToRemove;
 }
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        timeStep = 1.0 / 60.0;
-        accumulator = 0;
+        _timeStep = 1.0 / 60.0;
+        _accumulator = 0;
         prevTime = -1;
         frameCount = 0;
         g = GRAVITY;
@@ -58,13 +59,17 @@ float boxHeight = BIG_BOX_HEIGHT;
         physicsEndTime = 0;
         sampleStartTime = 0;
         
+//        _boxes = [[NSMutableArray alloc] init];
+        
+        
+        
 #ifdef BOX2D
         NSLog(@"Box2D Elastic - %d boxes", NUM_BOXES);
         
         b2Vec2 gravity(0.0f, g);
         bool doSleep = true;
-        world = new b2World(gravity);
-        world->SetAllowSleeping(doSleep);
+        _world = new b2World(gravity);
+        _world->SetAllowSleeping(doSleep);
         b2Vec2 vs[5];
         
         vs[0].Set(0, 0.0f);
@@ -85,14 +90,21 @@ float boxHeight = BIG_BOX_HEIGHT;
         
         b2BodyDef boundaryDef;
         boundaryDef.position.Set(0,0);
-        b2Body *boundary = world->CreateBody(&boundaryDef);
+        b2Body *boundary = _world->CreateBody(&boundaryDef);
         boundary->CreateFixture(&chain, 0);
+        
+        
+        _bodyToRemove = [[NSMutableArray alloc] init];
+        [NSTimer scheduledTimerWithTimeInterval:.5f target:self selector:@selector(onTickForBox2D:) userInfo:nil repeats:YES];
         
 #else
         NSLog(@"SKPhysics Elastic - %d boxes", NUM_BOXES);
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
         self.physicsWorld.gravity = CGVectorMake(0, g);
         self.physicsWorld.contactDelegate = self;
+        
+        _boxes = [[NSMutableArray alloc] init];
+        [NSTimer scheduledTimerWithTimeInterval:.5f target:self selector:@selector(onTickForSK:) userInfo:nil repeats:YES];
 #endif
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         
@@ -147,14 +159,14 @@ float boxHeight = BIG_BOX_HEIGHT;
     bodyDef.allowSleep = true;
     bodyDef.awake = true;
     
-    b2Body* body = world->CreateBody(&bodyDef);
+    b2Body* body = _world->CreateBody(&bodyDef);
     
     b2FixtureDef fixtureDef;
     b2PolygonShape polyShape;
         
         
-    float gapRemove = 0;//.005f;
-    polyShape.SetAsBox((Box.size.width / 2.0 / PIXELS_PER_METER)-gapRemove, (Box.size.height / 2.0 / PIXELS_PER_METER)-gapRemove);
+    float gap = 0;//.005f;
+    polyShape.SetAsBox((Box.size.width / 2.0 / PIXELS_PER_METER)+gap, (Box.size.height / 2.0 / PIXELS_PER_METER)+gap);
     fixtureDef.shape = &polyShape;
     
     fixtureDef.density = DENSITY;
@@ -166,11 +178,12 @@ float boxHeight = BIG_BOX_HEIGHT;
     
     body->SetUserData((__bridge void*)Box);
     
+//    SKSpriteNode *test = (__bridge SKSpriteNode *)body->GetUserData();
+    
     //body->SetAngularVelocity(6.28);
     body->SetAngularVelocity(ANGULAR_VELOCITY);
     body->SetAngularDamping(ANGULAR_DAMPING);
     body->SetLinearDamping(LINEAR_DAMPING);
-    
 #else
     Box.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:Box.size];
     Box.physicsBody.angularVelocity = ANGULAR_VELOCITY;
@@ -183,6 +196,7 @@ float boxHeight = BIG_BOX_HEIGHT;
     Box.physicsBody.collisionBitMask = 10;
     Box.physicsBody.contactTestBitMask = 10;
     Box.name = @"Box";
+    [_boxes addObject:Box];
 #endif
     
     [self addChild:Box];
@@ -191,6 +205,7 @@ float boxHeight = BIG_BOX_HEIGHT;
 
 
 #ifdef BOX2D
+//- (void)updatePhysicsWithDeltaT:(double)deltaT Accumulator:(double)accumulator TimeStep:(double)timeStep World:(b2World *)world{
 void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World *world) {
     int velocityIterations = 8;
     int positionIterations = 3;
@@ -210,6 +225,10 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
             
             
             for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+//                if(b == NULL){
+//                    return;
+//                }
+                
                 SKSpriteNode *sprite = (__bridge SKSpriteNode *)b->GetUserData();
                 b2Vec2 position = b->GetPosition();
                 
@@ -231,14 +250,23 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
         
         world->Step(timeStep, velocityIterations, positionIterations);
         
+//        for (b2Body* c = world->GetBodyList(); c; c = c->GetNext()) {
+//            SKSpriteNode *box = (__bridge SKSpriteNode*)c->GetUserData();
+//            [box removeFromParent];
+//            c->GetWorld()->DestroyBody(c);
+//        }
         
         accumulator -= timeStep;
     }
+    
     
     // interpolate remainder of update
     const double alpha = accumulator / timeStep;
     
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+//        if(b == NULL){
+//            return;
+//        }
         SKSpriteNode *sprite = (__bridge SKSpriteNode *)b->GetUserData();
         b2Vec2 position = b->GetPosition();
         CGPoint pos = CGPointMake((position.x * PIXELS_PER_METER +(1.0 - alpha) * sprite.position.x/PIXELS_PER_METER),
@@ -254,6 +282,27 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
     
 };
 #endif
+
+- (void)destroyBodyFromWorld
+{
+    for(NSInteger i=_bodyToRemove.count-1;i>=0;i--){
+        NSValue *bodyValue = [_bodyToRemove objectAtIndex:i];
+        b2Body *bodyToRemove = (b2Body *)[bodyValue pointerValue];
+        if(bodyToRemove){
+//            if(bodyValue){
+//                NSLog(@"bodyvalue is still there");
+//            }
+//            if([NSValue valueWithPointer:bodyToRemove]){
+//                NSLog(@"body valule 2 is still there");
+//            }
+            SKSpriteNode *box = (__bridge SKSpriteNode*)bodyToRemove->GetUserData();
+            [box removeFromParent];
+            bodyToRemove->GetWorld()->DestroyBody(bodyToRemove);
+            
+            [_bodyToRemove removeObject:bodyValue];
+        }
+    }
+}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
@@ -310,7 +359,10 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
         if (sampleStartTime == 0) {
             sampleStartTime = physicsStartTime;
         }
-        updatePhysics(deltaT, accumulator, timeStep, world);
+        updatePhysics(deltaT, _accumulator, _timeStep, _world);
+        [self destroyBodyFromWorld];
+//        [self updatePhysicsWithDeltaT:deltaT Accumulator:_accumulator TimeStep:_timeStep World:_world];
+        
         physicsEndTime = [NSDate timeIntervalSinceReferenceDate];
         frameCount++;
         
@@ -334,46 +386,174 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
 
 
 - (void)didBeginContact:(SKPhysicsContact *)contact {
-//    SKPhysicsBody *testA = contact.bodyA;
-    SKNode *nodeA = contact.bodyA.node;
-    SKNode *nodeB = contact.bodyB.node;
-    
-    if(nodeA && nodeB){
-        if([nodeA.name isEqualToString:@"Box"] && [nodeB.name isEqualToString:@"Box"]){
+//    SKNode *nodeA = contact.bodyA.node;
+//    SKNode *nodeB = contact.bodyB.node;
+//    
+//    if(nodeA && nodeB){
+//        if([nodeA.name isEqualToString:@"Box"] && [nodeB.name isEqualToString:@"Box"]){
+//            [self combineBoxA:nodeA BoxB:nodeB];
+//        }
+//    }
+//    NSLog(@"contact");
+}
 
-            float nodeASurface = nodeA.frame.size.width * nodeA.frame.size.height;//CGSizeMake(nodeA.xScale * nodeA.frame.size.width, nodeA.yScale * nodeA.frame.size.height);
-            float nodeBSurface = nodeB.frame.size.width * nodeB.frame.size.height;//CGSizeMake(nodeB.xScale * nodeB.frame.size.width, nodeB.yScale * nodeB.frame.size.height);
-            float nodeCombinedSurface = sqrtf(nodeASurface + nodeBSurface);
-            CGSize newSize = CGSizeMake(nodeCombinedSurface, nodeCombinedSurface);// CGSizeMake(nodeASize.width + nodeBSize.width, nodeASize.height + nodeBSize.height);
-            
-//            NSLog(@"scale nodeA = %f/%f  nodeB = %f/%f", nodeA.xScale,nodeA.yScale,nodeB.xScale,nodeB.yScale);
-//            NSLog(@"size nodeA = %f/%f  nodeB = %f/%f", nodeA.frame.size.width,nodeA.frame.size.height,nodeB.frame.size.width,nodeB.frame.size.height);
-//            NSLog(@"new size = %@", NSStringFromCGSize(newSize));
-//            NSLog(@"-----");
-            
-            
-            CGPoint newPos;
-//            if(nodeA.position.y < nodeB.position.y){
-            if(nodeASurface > nodeBSurface){
-                newPos = nodeA.position;
-            } else {
-                newPos = nodeB.position;
+- (void)combineBoxA:(SKNode *)boxA BoxB:(SKNode *)boxB
+{
+    float nodeASurface = boxA.frame.size.width * boxA.frame.size.height;//CGSizeMake(nodeA.xScale * nodeA.frame.size.width, nodeA.yScale * nodeA.frame.size.height);
+    float nodeBSurface = boxB.frame.size.width * boxB.frame.size.height;//CGSizeMake(nodeB.xScale * nodeB.frame.size.width, nodeB.yScale * nodeB.frame.size.height);
+    float nodeCombinedSurface = sqrtf(nodeASurface + nodeBSurface);
+    CGSize newSize = CGSizeMake(nodeCombinedSurface, nodeCombinedSurface);// CGSizeMake(nodeASize.width + nodeBSize.width, nodeASize.height + nodeBSize.height);
+    
+    //            NSLog(@"scale nodeA = %f/%f  nodeB = %f/%f", nodeA.xScale,nodeA.yScale,nodeB.xScale,nodeB.yScale);
+    //            NSLog(@"size nodeA = %f/%f  nodeB = %f/%f", nodeA.frame.size.width,nodeA.frame.size.height,nodeB.frame.size.width,nodeB.frame.size.height);
+    //            NSLog(@"new size = %@", NSStringFromCGSize(newSize));
+    //            NSLog(@"-----");
+    
+    
+    CGPoint newPos;
+    //            if(nodeA.position.y < nodeB.position.y){
+    if(nodeASurface > nodeBSurface){
+        newPos = boxA.position;
+    } else {
+        newPos = boxB.position;
+    }
+    
+    [self addBoxAtX:newPos.x Y:newPos.y Size:newSize];
+    
+#ifdef Box2D
+
+#else
+    [boxA removeFromParent];
+    [boxB removeFromParent];
+
+    [_boxes removeObject:boxA];
+    [_boxes removeObject:boxB];
+#endif
+}
+
+- (void)box2DCombineBodyA:(b2Body *)bodyA BodyB:(b2Body *)bodyB
+{
+    SKSpriteNode *boxA = (__bridge SKSpriteNode*)bodyA->GetUserData();
+    SKSpriteNode *boxB = (__bridge SKSpriteNode*)bodyB->GetUserData();
+    
+    if(![boxA.name isEqualToString:@"Box"] || ![boxB.name isEqualToString:@"Box"])
+        return;
+    
+    if([_bodyToRemove containsObject:[NSValue valueWithPointer:bodyA]])
+        return;
+    
+    if([_bodyToRemove containsObject:[NSValue valueWithPointer:bodyB]])
+        return;
+
+    
+    float nodeASurface = boxA.frame.size.width * boxA.frame.size.height;//CGSizeMake(nodeA.xScale * nodeA.frame.size.width, nodeA.yScale * nodeA.frame.size.height);
+    float nodeBSurface = boxB.frame.size.width * boxB.frame.size.height;//CGSizeMake(nodeB.xScale * nodeB.frame.size.width, nodeB.yScale * nodeB.frame.size.height);
+    float nodeCombinedSurface = sqrtf(nodeASurface + nodeBSurface);
+    CGSize newSize = CGSizeMake(nodeCombinedSurface, nodeCombinedSurface);// CGSizeMake(nodeASize.width + nodeBSize.width, nodeASize.height + nodeBSize.height);
+    
+    //            NSLog(@"scale nodeA = %f/%f  nodeB = %f/%f", nodeA.xScale,nodeA.yScale,nodeB.xScale,nodeB.yScale);
+    //            NSLog(@"size nodeA = %f/%f  nodeB = %f/%f", nodeA.frame.size.width,nodeA.frame.size.height,nodeB.frame.size.width,nodeB.frame.size.height);
+    //            NSLog(@"new size = %@", NSStringFromCGSize(newSize));
+    //            NSLog(@"-----");
+    
+    
+    CGPoint newPos;
+    //            if(nodeA.position.y < nodeB.position.y){
+    NSLog(@"nodeA y = %f  nodeB y = %f",nodeASurface,nodeBSurface);
+    if(nodeASurface > nodeBSurface){
+        newPos = boxA.position;
+    } else {
+        newPos = boxB.position;
+    }
+    
+    [self addBoxAtX:newPos.x Y:newPos.y Size:newSize];
+    
+//    bodyA->GetWorld()->DestroyBody(bodyA);
+//    bodyB->GetWorld()->DestroyBody(bodyB);
+//
+    NSValue *bodyAValue = [NSValue valueWithPointer:bodyA];
+    NSValue *bodyBValue = [NSValue valueWithPointer:bodyB];
+//    if(![_bodyToRemove containsObject:bodyAValue]){
+        [_bodyToRemove addObject:bodyAValue];
+//    }
+//    if(![_bodyToRemove containsObject:bodyBValue]){
+        [_bodyToRemove addObject:bodyBValue];
+//    }
+//    [self destroyBodyFromWorld];
+}
+
+//- (BOOL)checkIfBoxIsSleeping:(SKSpriteNode *)box
+//{
+//    return box
+//}
+
+//- (BOOL)getTouchingBodyForBody:(b2Body*)body
+//{
+//    BOOL test = b2TestOverlap(const b2Shape* body,const b2Shape* body);
+//    return test;
+//}
+
+- (void)onTickForBox2D:(NSTimer *)timer
+{
+//    NSLog(@"tick");
+    
+//    b2Body *test = world->GetBodyList();
+    for (b2Body* b = _world->GetBodyList(); b; b = b->GetNext()) {
+        if(!b->IsAwake()){
+            for (b2ContactEdge* edge = b->GetContactList(); edge; edge = edge->next) {
+                if (edge->contact->IsTouching()) {
+                    b2Body* bodyA = edge->contact->GetFixtureA()->GetBody();
+                    b2Body* bodyB = edge->contact->GetFixtureB()->GetBody();
+                    if(bodyA != bodyB && bodyA!=NULL && bodyB!=NULL){
+//                        SKSpriteNode *boxA = (__bridge SKSpriteNode*)bodyA->GetUserData();
+//                        SKSpriteNode *boxB = (__bridge SKSpriteNode*)bodyB->GetUserData();
+//                        NSLog(@"box a = %@  b = %@",boxA.name,boxB.name);
+//                        if([boxA.name isEqualToString:@"Box"] && [boxB.name isEqualToString:@"Box"]){
+//                            [self combineBoxA:boxA BoxB:boxB];
+                            [self box2DCombineBodyA:bodyA BodyB:bodyB];
+//                            return;
+//                        }
+                    }
+                }
             }
+        
             
-            [self addBoxAtX:newPos.x Y:newPos.y Size:newSize];
-            
-            [nodeA removeFromParent];
-            [nodeB removeFromParent];
+//            NSLog(@"sleeping!");
         }
     }
-//    if(testA){
-//        NSLog(@"test is there!");
+//    for(var body:b2Body = world.GetBodyList(); body; body = body.GetNext())
+//    {
+//        list.text+="\n";
+//        list.text+=(body +" " + body.GetUserData());
 //    }
-//    [nodeA removeFromParent];
-//    [nodeB removeFromParent];
-    //    removeFromParent
-    
-//    NSLog(@"contact");
+}
+
+- (SKSpriteNode *)getNearestTouchingNode:(SKSpriteNode *)targetNode
+{
+    NSLog(@"check touch");
+    for(SKSpriteNode *node in _boxes){
+        if(targetNode != node)
+        {
+            if([targetNode intersectsNode:node]){
+                return node;
+            }
+        }
+    }
+    return nil;
+}
+
+- (void)onTickForSK:(NSTimer *)timer
+{
+//    NSLog(@"tick");s
+    for(SKSpriteNode *node in _boxes){
+        if(node.physicsBody.isResting){
+            SKSpriteNode *nearestTouchingNode = [self getNearestTouchingNode:node];
+            if(nearestTouchingNode){
+                [self combineBoxA:node BoxB:nearestTouchingNode];
+                break;
+            }
+        }
+    }
 }
 
 @end
