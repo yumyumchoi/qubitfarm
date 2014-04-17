@@ -17,7 +17,7 @@
     "body": {
         "uid": "qfu1a736aa69d5a0e4f2df9e30cd9ac8d795",
         "num_of_leaders": 10,
-        "sort_order": "highest to lowest"
+        "sort_order": "most to least"
     }
 }</textarea>
 	<div id="button">Submit</div>
