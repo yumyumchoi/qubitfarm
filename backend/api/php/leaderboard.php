@@ -26,10 +26,14 @@ if ($uid == "" || $uid == null) { echo "Cannot search: 'uid' is not defined." ; 
 
 		// SORT ORDER
 		$sort_order = $seed['body']['sort_order'];
-		if (isset($sort_order) && $sort_order == 'most to least' || $sort_order == 'least to most') {
-			if ($sort_order == 'most to least') { $sort_order_return = -1; }
-			if ($sort_order == 'least to most') { $sort_order_return = 1; } 
-		} else { 
+		if (isset($sort_order)) {
+			if ($sort_order == 'most to least' || $sort_order == 'least to most') {
+				if ($sort_order == 'most to least') { $sort_order_return = -1; }
+				if ($sort_order == 'least to most') { $sort_order_return = 1; } 
+			} else { 
+				echo "The 'sort_order' must be set to 'most to least' or 'least to most' for sorting"; die;
+			}
+		} else {
 			$sort_order_return = -1;
 		}
 
