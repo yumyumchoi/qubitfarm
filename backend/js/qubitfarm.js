@@ -3,7 +3,7 @@
 $(document).ready( function() {
 	buttonHandler();
 	textAreaTab();
-	setAPIcall('leaderboard.json',1);
+	setAPIcall('leaderboard.json',2);
 });
 
 // ---------------------------------------------------------------------------------------------------- //\
@@ -87,7 +87,7 @@ function buttonHandler() {
 // ---------------------------------------------------------------------------------------------------- //
 
 function setAPIcall(call,link) {
-	for(i=0;i<7;i++) { 
+	for(i=0;i<8;i++) { 
 		if (i == link) { 
 			$("#"+i).css({"text-decoration":"underline"});
 		} else {

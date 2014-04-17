@@ -1,0 +1,10 @@
+{
+    "header": {
+        "method": "purchase plot",
+        "world_index": 1
+    },
+    "body": {
+        "user_id": "qfu18f4e27d598592d5e309459dddc2ef46f",
+        "plot_id": "qfw154c1f791128144ac21df2a515f281cd3"
+    }
+}

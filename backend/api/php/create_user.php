@@ -31,7 +31,8 @@ $user = array(
 			"date_added_ep" => date("U"),
 			"date_generated_hr" => date("r"),
             "plot_id" => $first_plot_id,
-			"plot_name" => $first_plot_name
+			"plot_name" => $first_plot_name,
+			"plot_qubits" => $first_plot_qubits
 		)
 	)
 );

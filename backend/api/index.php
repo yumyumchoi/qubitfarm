@@ -49,7 +49,7 @@ function hexGenerator() {
 if (isset($body) || $method == "create user") { } else { echo "Parameters of 'body' are either undefined or malformed." ; die; } 
 
 // CHECK HEADERS
-$request_array = array("get user","get plots","leaderboard","create world","create user");
+$request_array = array("get user","get plots","leaderboard","create world","create user","purchase plot");
 if (!in_array($method,$request_array)) { echo "Unknown method '".$method. "'. Use => '".implode("','",$request_array)."'" ;die; }
 
 // CHECK FOR WORLD
@@ -67,11 +67,12 @@ if ($method == "create world") { } else {
 // ---------------------------------------------------------------------------------------------------- //
 
 // CALL METHODS
-if ($method == "get user") { include('php/user_get.php'); }
-if ($method == "get plots") { include('php/world_get.php'); }
+if ($method == "get user") { include('php/get_user.php'); }
+if ($method == "get plots") { include('php/get_plots.php'); }
 if ($method == "leaderboard") { include('php/leaderboard.php'); }
-if ($method == "create user") { include('php/user_generator.php'); }
-if ($method == "create world") { include('php/world_generator.php'); }
+if ($method == "create user") { include('php/create_user.php'); }
+if ($method == "create world") { include('php/create_world.php'); }
+if ($method == "purchase plot") { include('php/purchase_plot.php'); }
 
 // ---------------------------------------------------------------------------------------------------- //
 	

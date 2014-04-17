@@ -81,19 +81,23 @@ $plots = $world_collection->aggregate($query);
 $c = 0;
 foreach($plots['result'] as $k => $v) {
 	$c++;
-	$plot_result[$c]['pid'] = $v['_id'];
-	$plot_result[$c]['name'] = $v['name'];
-	$plot_result[$c]['index'] = $v['index'];
-	$plot_result[$c]['owner_id'] = $v['owner_id'];
-	$plot_result[$c]['plots_total_in_world'] = $v['plots_total_in_world'];
-	$plot_result[$c]['date_generated_ep'] = $v['date_generated_ep'];
-	$plot_result[$c]['date_generated_hr'] = $v['date_generated_hr'];
-	$plot_result[$c]['color'] = $v['plot_style']['color'];
-	$plot_result[$c]['qubits_availible_in_plot'] = $v['plot_parameters']['qubits_availible_in_plot'];
-	$plot_result[$c]['qubits_total_in_plot'] = $v['plot_parameters']['qubits_total_in_plot'];
-	if ($full == true) { $plot_result[$c]['plot_dimensions'] = $v['plot_parameters']['plot_dimensions']; } else { }
-	$plot_result[$c]['num_of_patches'] = $v['plot_parameters']['plot_size'];
-	if ($full == true) { $plot_result[$c]['plot_layout'] = $v['plot_parameters']['plot_layout']; } else { }
+	// FULL
+	if ($full == true) { $plot_result[$c] = $v ; } else {
+		// DIGEST
+		$plot_result[$c]['pid'] = $v['_id'];
+		$plot_result[$c]['name'] = $v['name'];
+		$plot_result[$c]['index'] = $v['index'];
+		$plot_result[$c]['owner_id'] = $v['owner_id'];
+		$plot_result[$c]['plots_total_in_world'] = $v['plots_total_in_world'];
+		$plot_result[$c]['date_generated_ep'] = $v['date_generated_ep'];
+		$plot_result[$c]['date_generated_hr'] = $v['date_generated_hr'];
+		$plot_result[$c]['color'] = $v['plot_style']['color'];
+		$plot_result[$c]['qubits_availible_in_plot'] = $v['plot_parameters']['qubits_availible_in_plot'];
+		$plot_result[$c]['qubits_total_in_plot'] = $v['plot_parameters']['qubits_total_in_plot'];
+		//if ($full == true) { $plot_result[$c]['plot_dimensions'] = $v['plot_parameters']['plot_dimensions']; } else { }
+		$plot_result[$c]['num_of_patches'] = $v['plot_parameters']['plot_size'];
+		//if ($full == true) { $plot_result[$c]['plot_layout'] = $v['plot_parameters']['plot_layout']; } else { }
+	}
 	
 }
 
