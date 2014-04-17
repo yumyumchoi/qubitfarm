@@ -111,7 +111,7 @@ function setAPIcall(call,link) {
 
 function iFrame(doc_id) {
 	$('#main').append(
-		'<div id="iframe-box"><iframe src="https://docs.google.com/document/d/'+doc_id+'/pub?embedded=true"></iframe></div>'
+		'<div id="iframe-box"><iframe src="https://docs.google.com/document/d/'+doc_id+'"></iframe></div>'
 	);
 	$('#iframe-box').click( function(){
 		$(this).remove();
