@@ -20,14 +20,14 @@
 #define ANGULAR_DAMPING (0)
 #define LINEAR_DAMPING (0)
 #define DENSITY (1.0)
-#define FRICTION (1.0)
-#define RESTITUTION (0)
+#define FRICTION (0.3)
+#define RESTITUTION (.1)
 #define GRAVITY (-4)
 #define EPSILON (.05)
 #define RANDOM_SIZE
 #define GRID_LAYOUT_FOR_CREATION
 
-#define GROUP_CREATION_DELAY (10)
+#define GROUP_CREATION_DELAY (1)
 //#define CREATION_IDLE_TICK_DELAY (180)
 //#define CREATION_IDLE_TICK_MODIF (20)
 //#define MANUAL_COMBINE_TICK_MODIF (30)
@@ -66,6 +66,7 @@ float boxHeight = BIG_BOX_HEIGHT;
     
     NSArray *_boxColors;
     float _currentAggBoxHeight;
+    NSMutableArray *_boxToCreate;
 }
 
 - (id) initWithSize:(CGSize)size MotionManager:(CMMotionManager *)motionManager
@@ -106,7 +107,10 @@ float boxHeight = BIG_BOX_HEIGHT;
         _randomXDict = [[NSMutableDictionary alloc] init];
         _randomYDict = [[NSMutableDictionary alloc] init];
         
-        _boxColors = [[NSArray alloc] initWithObjects:[UIColor whiteColor],[UIColor yellowColor],[UIColor orangeColor],[UIColor redColor],[UIColor purpleColor],[UIColor magentaColor],[UIColor blueColor],[UIColor brownColor],[UIColor greenColor],[UIColor lightGrayColor], nil];
+        _boxToCreate = [[NSMutableArray alloc] init];
+        
+//        _boxColors = [[NSArray alloc] initWithObjects:[UIColor whiteColor],[UIColor yellowColor],[UIColor orangeColor],[UIColor redColor],[UIColor purpleColor],[UIColor magentaColor],[UIColor blueColor],[UIColor brownColor],[UIColor greenColor],[UIColor lightGrayColor], nil];
+        _boxColors = [[NSArray alloc] initWithObjects:[UIColor colorWithWhite:0 alpha:255],[UIColor colorWithWhite:.3 alpha:255],[UIColor colorWithWhite:.2 alpha:255],[UIColor colorWithWhite:.1 alpha:255], [UIColor colorWithWhite:.05 alpha:255], [UIColor colorWithWhite:.15 alpha:255], [UIColor colorWithWhite:.25 alpha:255], [UIColor colorWithWhite:.08 alpha:255],nil];
 #ifdef BOX2D
         NSLog(@"Box2D Elastic - %d boxes", NUM_BOXES);
         
@@ -137,7 +141,7 @@ float boxHeight = BIG_BOX_HEIGHT;
         
         
         _bodyToRemove = [[NSMutableArray alloc] init];
-        [NSTimer scheduledTimerWithTimeInterval:.1f target:self selector:@selector(onTickForBox2D:) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:.05f target:self selector:@selector(onTickForBox2D:) userInfo:nil repeats:YES];
         
 #else
         NSLog(@"SKPhysics Elastic - %d boxes", NUM_BOXES);
@@ -148,11 +152,13 @@ float boxHeight = BIG_BOX_HEIGHT;
         _boxes = [[NSMutableArray alloc] init];
         [NSTimer scheduledTimerWithTimeInterval:.1f target:self selector:@selector(onTickForSK:) userInfo:nil repeats:YES];
 #endif
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [SKColor lightGrayColor];// [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         
-        [self addBoxes];
+//        [self addBoxes];
         
+        [self setupBoxCreationInstruction];
     }
+
     return self;
 }
 
@@ -190,9 +196,9 @@ float boxHeight = BIG_BOX_HEIGHT;
         size = _screenDimen;
     }
     
-//    NSInteger randomIndex = arc4random()%_boxColors.count;
-//    UIColor *randomColor =  [_boxColors objectAtIndex:randomIndex];
-    SKSpriteNode *Box = [[SKSpriteNode alloc] initWithColor:[UIColor whiteColor] size:size];
+    NSInteger randomIndex = arc4random()%_boxColors.count;
+    UIColor *randomColor =  [_boxColors objectAtIndex:randomIndex];
+    SKSpriteNode *Box = [[SKSpriteNode alloc] initWithColor:randomColor size:size];
     Box.position = CGPointMake(x, y);
     Box.name = @"Box";
     
@@ -616,7 +622,8 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
     
     if(_tick > _nextTickForGroupCreation){
         _nextTickForGroupCreation = _tick + GROUP_CREATION_DELAY;
-        [self addBoxGroups];
+        [self addBoxInSequence];
+//        [self addBoxGroups];
     }
 }
 
@@ -668,10 +675,11 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
     }
 }
 
-- (void)addBoxGroups
+- (void)setupBoxCreationInstruction
 {
-    if(_currentAggBoxHeight >= (_screenDimen.height*.9))
-        return;
+    float currentAggBoxHeight = 0;
+    while(currentAggBoxHeight < (_screenDimen.height*.9)) {
+        
  
 //    NSLog(@"creating new box group");
     float highestHeight =0;
@@ -708,11 +716,30 @@ void updatePhysics(double deltaT, double &accumulator, double timeStep, b2World 
         CGPoint newPos = CGPointMake(lastEndPosX + (size.width*.5) + currentGap, 448);
         lastEndPosX = newPos.x + (size.width*.5);
 //        NSLog(@"size = %@   pos = %@",NSStringFromCGSize(size),NSStringFromCGPoint(newPos));
-        [self addBoxAtX:newPos.x Y:newPos.y Size:size CombinedMode:NO];
+//        [self addBoxAtX:newPos.x Y:newPos.y Size:size CombinedMode:NO];
         
+        
+        void (^createNewBoxBlock)() = ^(){
+            [self addBoxAtX:newPos.x Y:newPos.y Size:size CombinedMode:NO];
+//            NSLog(@"test");
+        };
+//        createBoxBlock test = createNewBoxBlock;
+        [_boxToCreate addObject:createNewBoxBlock];
     }
     
-    _currentAggBoxHeight += highestHeight;
+        currentAggBoxHeight += highestHeight;
+    }
+}
+
+- (void)addBoxInSequence
+{
+    if(_boxToCreate.count == 0)
+        return;
+    
+    createBoxBlock block = [_boxToCreate firstObject];
+    block();
+    
+    [_boxToCreate removeObjectAtIndex:0];
 }
 
 @end

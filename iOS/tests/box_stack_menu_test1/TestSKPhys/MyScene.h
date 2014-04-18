@@ -9,6 +9,8 @@
 #import <SpriteKit/SpriteKit.h>
 #import <CoreMotion/CoreMotion.h>
 
+typedef void (^createBoxBlock)(void);
+
 @interface MyScene : SKScene <SKPhysicsContactDelegate>
 
 - (id) initWithSize:(CGSize)size MotionManager:(CMMotionManager *)motionManager;
