@@ -7,7 +7,9 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface MyScene : SKScene <SKPhysicsContactDelegate>
 
+- (id) initWithSize:(CGSize)size MotionManager:(CMMotionManager *)motionManager;
 @end
